@@ -1,11 +1,11 @@
 #include <Arduino.h>
 #include <esp32-hal-dac.h>
+#include <WiFi.h>
 
 #include "connection.h"
 #include "DRV8835_Driver.h"
 #include "QRE1113_Driver.h"
 #include "my_util.h"
-#include "commands.h"
 
 //Motor object
 DRV8835 motors;
@@ -43,8 +43,7 @@ void setup()
     motors.attachM2Pin(26, 27);
     motors.init();
 
-
-    /*
+    
     //initialize connection
     conn::setupAP();
     server.begin();
@@ -59,7 +58,7 @@ void loop()
 	leftEncoder.update();
 	rightEncoder.update();
 
-	/*
+	
 	//Wifi link - check if client is still connected
 	if(!client || !client.connected())
 		conn::waitForServerClients();

@@ -10,3 +10,10 @@
 */.cproject
 */.ino.cpp
 *~
+*/Visual Micro
+*/*.sdf
+*/*.suo
+*/*.vcxproj
+*/*.filters
+*/*.opensdf
+*/*.sln
