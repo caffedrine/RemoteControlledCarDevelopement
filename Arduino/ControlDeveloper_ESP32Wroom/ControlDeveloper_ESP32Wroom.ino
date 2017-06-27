@@ -11,8 +11,8 @@
 DRV8835 motors;
 
 //Encoders (IR Sensor: QRE1113)
-QRE1113 leftEncoder(35);
-QRE1113 rightEncoder(39);
+QRE1113 leftEncoder(12);
+QRE1113 rightEncoder(13);
 
 //Functions prototypes
 void parseData();
@@ -68,6 +68,16 @@ void loop()
 		Serial.print(recvMsg);
 
 		conn::writeString("Command(s) received...");
+
+		parseData(Serial.readString());
+		if (execute_command())
+		{
+			conn::writeString("Command(s) executed...");
+		}
+		else
+		{
+			conn::writeString("Command(s) failed (NOT)...");
+		}
 	}
 	//*/
 
@@ -84,7 +94,7 @@ void loop()
 
 bool parseData(String data)
 {
-	//Format of data we receive: >>[0;-100;0] or [0;-100;0]#[0;-100;0]#[0;-100;0]
+	//Format of data we receive: >>[R;-100;0] or [R;-100;0]#[G;-100;0]#[R;-100;0]
 	if (data.length() < 7)
 	{
 		command.updated = false;
@@ -131,6 +141,7 @@ bool execute_command()
 
 	if (command.name == "D")
 	{
+		command_direction();
 		return true;
 	}
 	else if (command.name == "G")
@@ -140,10 +151,12 @@ bool execute_command()
 	}
 	else if (command.name == "R")
 	{
+		command_repetition();
 		return true;
 	}
 	else if (command.name == "P")
 	{
+		command_pause();
 		return true;
 	}
 	else
@@ -157,22 +170,33 @@ void command_direction()
 {
 	Serial.println("Executing direction...");
 	Serial.println("Degree:\t" + String(command.degrees));
+
+	motors.setM1Speed(2000);
+	motors.setM1Speed(-2000);
 }
 
 void command_gear()
 {
 	Serial.println("Executing gear...");
 	Serial.println("Speed:\t" + String(command.speed) + "\tDuration: " + String(command.duration));
+
+	motors.setM1Speed(4000);
+	motors.setM1Speed(4000);
 }
 
 void command_repetition()
 {
 	Serial.println("Executing repetition...");
 	Serial.println("nrSteps: :\t" + String(command.nrSteps) + "\tnrRepetitions: " + String(command.nrRepetition));
+
+	//Repetition? Not sure...
 }
 
 void command_pause()
 {
 	Serial.println("Executing pause...");
 	Serial.println("Duration:\t" + String(command.duration));
+	
+	//Pause means to delay program
+	delay(command.duration);
 }
