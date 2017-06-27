@@ -11,8 +11,8 @@
 DRV8835 motors;
 
 //Encoders (IR Sensor: QRE1113)
-QRE1113 leftEncoder(12);
-QRE1113 rightEncoder(13);
+QRE1113 leftEncoder(23);
+QRE1113 rightEncoder(15);
 
 //Functions prototypes
 void parseData();
@@ -38,8 +38,8 @@ void setup()
 	Serial.println("---STARTING---");
 
 	//initialize motors
-	motors.attachM1Pin(25, 14);
-	motors.attachM2Pin(26, 27);
+	motors.attachM1Pin(25, 14);	// en, ph
+	motors.attachM2Pin(26, 27);	// en, ph
 	motors.init();
 
 	//initialize connection

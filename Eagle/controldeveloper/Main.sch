@@ -14400,6 +14400,12 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <part name="P+1" library="supply1" deviceset="VCC" device=""/>
 <part name="P+2" library="supply1" deviceset="VCC" device=""/>
 <part name="P+3" library="supply1" deviceset="VCC" device=""/>
+<part name="JP1" library="pinhead" deviceset="PINHD-1X3" device="/90"/>
+<part name="JP2" library="pinhead" deviceset="PINHD-1X3" device="/90"/>
+<part name="GND11" library="supply1" deviceset="GND" device=""/>
+<part name="GND12" library="supply1" deviceset="GND" device=""/>
+<part name="P+4" library="supply1" deviceset="VCC" device=""/>
+<part name="P+5" library="supply1" deviceset="VCC" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14425,6 +14431,12 @@ M2</text>
 <text x="170.688" y="109.728" size="1.778" layer="95">RX
 TX
 GND</text>
+<text x="148.54" y="60" size="1.778" layer="91">GND
+VCC
+OUT</text>
+<text x="156.5" y="60" size="1.778" layer="91">GND
+VCC
+OUT</text>
 </plain>
 <instances>
 <instance part="OUT" gate="A" x="20.32" y="58.42"/>
@@ -14462,6 +14474,12 @@ GND</text>
 <instance part="P+1" gate="VCC" x="55.88" y="76.2"/>
 <instance part="P+2" gate="VCC" x="76.2" y="119.38"/>
 <instance part="P+3" gate="VCC" x="162.56" y="132.08"/>
+<instance part="JP1" gate="A" x="145.796" y="63.5"/>
+<instance part="JP2" gate="A" x="164.084" y="63.5" rot="MR0"/>
+<instance part="GND11" gate="1" x="134.62" y="73.66" rot="R180"/>
+<instance part="GND12" gate="1" x="175.26" y="73.66" rot="R180"/>
+<instance part="P+4" gate="VCC" x="127" y="73.66"/>
+<instance part="P+5" gate="VCC" x="182.88" y="73.66"/>
 </instances>
 <busses>
 </busses>
@@ -14525,6 +14543,18 @@ GND</text>
 <wire x1="-5.08" y1="99.06" x2="-2.54" y2="99.06" width="0.1524" layer="91"/>
 <wire x1="-2.54" y1="99.06" x2="-2.54" y2="96.52" width="0.1524" layer="91"/>
 <pinref part="U3" gate="G$1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="JP1" gate="A" pin="1"/>
+<wire x1="143.256" y1="66.04" x2="134.62" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="134.62" y1="66.04" x2="134.62" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="GND11" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="1"/>
+<wire x1="166.624" y1="66.04" x2="175.26" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="66.04" x2="175.26" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="GND12" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -14673,6 +14703,30 @@ GND</text>
 <wire x1="55.88" y1="63.5" x2="45.72" y2="63.5" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="VCC" pin="VCC"/>
 <wire x1="55.88" y1="73.66" x2="55.88" y2="72.58" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="JP1" gate="A" pin="2"/>
+<wire x1="143.256" y1="63.5" x2="127" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="127" y1="63.5" x2="127" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="P+4" gate="VCC" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="2"/>
+<wire x1="166.624" y1="63.5" x2="182.88" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="182.88" y1="63.5" x2="182.88" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="P+5" gate="VCC" pin="VCC"/>
+</segment>
+</net>
+<net name="N$17" class="0">
+<segment>
+<pinref part="JP1" gate="A" pin="3"/>
+<wire x1="143.256" y1="60.96" x2="134.62" y2="60.96" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$18" class="0">
+<segment>
+<pinref part="JP2" gate="A" pin="3"/>
+<wire x1="166.624" y1="60.96" x2="175.26" y2="60.96" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
