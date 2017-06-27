@@ -65,11 +65,21 @@ void loop()
 	if (client.available())
 	{
 		String recvMsg = conn::readString();
-		Serial.print(recvMsg);
+		Serial.print(recvMsg.substring(0, recvMsg.length() - 1));	//Removing \n from the end
 
+		//Send feedback to Java App telling that we received command.
 		conn::writeString("Command(s) received...");
 
-		parseData(Serial.readString());
+		//Try to parse received data
+		if (parseData(Serial.readString()))
+		{
+			Serial.println("Data parsed!");
+		}
+		else
+		{
+			Serial.print("Failed to parse data!");
+		}
+		
 		if (execute_command())
 		{
 			conn::writeString("Command(s) executed...");
@@ -94,7 +104,7 @@ void loop()
 
 bool parseData(String data)
 {
-	//Format of data we receive: >>[R;-100;0] or [R;-100;0]#[G;-100;0]#[R;-100;0]
+	//Format of data we receive: >>[G;-100;0] or [D;-100;0]#[R;-100;0]#[P;-100;0]
 	if (data.length() < 7)
 	{
 		command.updated = false;
