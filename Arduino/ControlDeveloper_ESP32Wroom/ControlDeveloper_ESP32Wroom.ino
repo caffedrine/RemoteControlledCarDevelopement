@@ -30,7 +30,6 @@ struct Command
 
 	//private data regarding command
 	bool updated = false;
-
 }command;
 
 void setup()
@@ -42,7 +41,6 @@ void setup()
 	motors.attachM1Pin(25, 14);
 	motors.attachM2Pin(26, 27);
 	motors.init();
-
 
 	//initialize connection
 	conn::setupAP();
@@ -78,7 +76,6 @@ void loop()
 		parseData(Serial.readString());
 		execute_command();
 	}
-
 
 	//Get exact number of steps since last time
 	//printPeriodicData(to_string(leftSteps) + "\t" + to_string(rightSteps), 50);
