@@ -43,9 +43,9 @@ void setup()
 	motors.init();
 
 	//initialize connection
-	conn::setupAP();
-	server.begin();
-	conn::waitForServerClients();
+	//conn::setupAP();
+	//server.begin();
+	//conn::waitForServerClients();
 	//*/
 }
 
@@ -56,7 +56,7 @@ void loop()
 	leftEncoder.update();
 	rightEncoder.update();
 
-
+	/*
 	//Wifi link - check if client is still connected
 	if (!client || !client.connected())
 		conn::waitForServerClients();
@@ -71,13 +71,13 @@ void loop()
 		conn::writeString("Command(s) received...");
 
 		//Try to parse received data
-		if (parseData(Serial.readString()))
+		if (parseData(recvMsg))
 		{
 			Serial.println("Data parsed!");
 		}
 		else
 		{
-			Serial.print("Failed to parse data!");
+			Serial.println("Failed to parse data!");
 		}
 		
 		if (execute_command())
@@ -96,6 +96,13 @@ void loop()
 		parseData(Serial.readString());
 		execute_command();
 	}
+	
+	//Display encoders steps
+	if (leftEncoder.currSteps != leftEncoder.lastSteps)
+		Serial.println("Left steps: " + to_string(leftEncoder.currSteps));
+
+	if (rightEncoder.currSteps != rightEncoder.lastSteps)
+		Serial.print("Right steps: " + to_string(leftEncoder.currSteps));
 
 	//Get exact number of steps since last time
 	//printPeriodicData(to_string(leftSteps) + "\t" + to_string(rightSteps), 50);
@@ -110,6 +117,7 @@ bool parseData(String data)
 		command.updated = false;
 		return false;
 	}
+
 	data = data.substring(data.indexOf('[') + 1);
 	data = data.substring(0, data.indexOf(']'));
 
@@ -124,6 +132,7 @@ bool parseData(String data)
 	{
 		command.speed = getStringPartByNr(data, ';', 1).toInt();
 		command.duration = getStringPartByNr(data, ';', 2).toInt();
+
 	}
 	else if (command.name == "R")
 	{
@@ -179,34 +188,52 @@ bool execute_command()
 void command_direction()
 {
 	Serial.println("Executing direction...");
-	Serial.println("Degree:\t" + String(command.degrees));
+	Serial.println("Degree: " + String(command.degrees));
 
-	motors.setM1Speed(2000);
-	motors.setM1Speed(-2000);
+	motors.setM1Speed(3000);
+	motors.setM1Speed(-3000);
+
+	Serial.println("SUCCESS\n");
 }
 
 void command_gear()
 {
 	Serial.println("Executing gear...");
-	Serial.println("Speed:\t" + String(command.speed) + "\tDuration: " + String(command.duration));
+	Serial.println("Speed: " + String(command.speed) + " Duration: " + String(command.duration));
 
-	motors.setM1Speed(4000);
-	motors.setM1Speed(4000);
+	motors.setM1Speed(command.speed);
+	motors.setM1Speed(command.speed);
+
+	delay(command.duration);
+
+	motors.setM1Speed(0);
+	motors.setM1Speed(0);
+
+	command.updated = false;
+
+	Serial.println("SUCCESS\n");
 }
 
 void command_repetition()
 {
 	Serial.println("Executing repetition...");
-	Serial.println("nrSteps: :\t" + String(command.nrSteps) + "\tnrRepetitions: " + String(command.nrRepetition));
+	Serial.println("nrSteps: : " + String(command.nrSteps) + " nrRepetitions: " + String(command.nrRepetition));
 
 	//Repetition? Not sure...
+
+	Serial.println("SUCCESS\n");
 }
 
 void command_pause()
 {
 	Serial.println("Executing pause...");
-	Serial.println("Duration:\t" + String(command.duration));
+	Serial.println("Duration: " + String(command.duration));
 	
 	//Pause means to delay program
 	delay(command.duration);
+
+	//Set this marker to show when new commands were received
+	command.updated = true;
+
+	Serial.println("SUCCESS\n");
 }
