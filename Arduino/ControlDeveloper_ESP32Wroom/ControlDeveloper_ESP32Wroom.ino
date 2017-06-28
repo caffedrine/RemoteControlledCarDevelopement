@@ -11,8 +11,8 @@
 DRV8835 motors;
 
 //Encoders (IR Sensor: QRE1113)
-QRE1113 leftEncoder(23);
-QRE1113 rightEncoder(15);
+QRE1113 leftEncoder(4);
+QRE1113 rightEncoder(34);
 
 //Functions prototypes
 void parseData();
@@ -90,22 +90,24 @@ void loop()
 		}
 	}
 	//*/
-
 	if (Serial.available() > 0)
 	{
 		parseData(Serial.readString());
 		execute_command();
 	}
-	
+
+	/*
+	int left = analogRead(4);
+	int right = analogRead(34);
+	printPeriodicData(to_string(left) + " " + to_string(right), 50);
+	*/
+
 	//Display encoders steps
 	if (leftEncoder.currSteps != leftEncoder.lastSteps)
 		Serial.println("Left steps: " + to_string(leftEncoder.currSteps));
 
 	if (rightEncoder.currSteps != rightEncoder.lastSteps)
-		Serial.print("Right steps: " + to_string(leftEncoder.currSteps));
-
-	//Get exact number of steps since last time
-	//printPeriodicData(to_string(leftSteps) + "\t" + to_string(rightSteps), 50);
+		Serial.println("Right steps: " + to_string(rightEncoder.currSteps));
 	//*/
 }
 

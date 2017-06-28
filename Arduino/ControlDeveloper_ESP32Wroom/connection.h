@@ -11,8 +11,8 @@ const char *AP_Name   = "LAB_ROVER_1";
 const char *AP_Passwd = "LabRover@Passwd";
 
 //Led which will indicate data transfers
-int connectionLedIndicatorPin = 5;
-int trafficLedIndicatorPin = 5;
+int connectionLedIndicatorPin = 19;
+int trafficLedIndicatorPin = 22;
 
 //Setting up server on specified port
 WiFiServer server(1337, 1);

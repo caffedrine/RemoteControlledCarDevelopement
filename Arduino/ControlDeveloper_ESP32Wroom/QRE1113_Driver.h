@@ -10,6 +10,10 @@ public:
 	int currVal = 0, lastVal = 0;
 	int currSteps = 0, lastSteps = 0;
 
+	//This mean that sensors have to be calibrated on every car
+	int minUnder = 500; //under which value will be considered 0 (0-4095)
+	int maxUp = 2150;	//values up to this variable will be considered 1
+
 	QRE1113(int pin)
 	{
 		this->sensorPin = pin;
