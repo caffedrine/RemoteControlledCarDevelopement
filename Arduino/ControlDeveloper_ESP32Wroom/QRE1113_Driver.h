@@ -11,8 +11,8 @@ public:
 	int currSteps = 0, lastSteps = 0;
 
 	//This mean that sensors have to be calibrated on every car
-	int minUnder = 500; //under which value will be considered 0 (0-4095)
-	int maxUp = 2150;	//values up to this variable will be considered 1
+	int minUnder = 3790; //under which value will be considered 0 (0-4095)
+	int maxUp = 3800;	 //values up to this variable will be considered 1
 
 	QRE1113(int pin)
 	{
@@ -27,9 +27,9 @@ public:
 
 		this->currVal = analogRead(this->sensorPin);
 
-		if(this->currVal < 500)
+		if(this->currVal < minUnder)
 			this->currVal = 1;
-		else if(this->currVal > 2150)
+		else if(this->currVal > maxUp)
 			this->currVal = 0;
 		else
 			this->currVal = this->lastVal;

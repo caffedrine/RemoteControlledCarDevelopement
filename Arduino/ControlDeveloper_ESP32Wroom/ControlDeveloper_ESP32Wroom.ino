@@ -96,11 +96,11 @@ void loop()
 		execute_command();
 	}
 
-	/*
+	
 	int left = analogRead(4);
 	int right = analogRead(34);
 	printPeriodicData(to_string(left) + " " + to_string(right), 50);
-	*/
+	//*/
 
 	//Display encoders steps
 	if (leftEncoder.currSteps != leftEncoder.lastSteps)
