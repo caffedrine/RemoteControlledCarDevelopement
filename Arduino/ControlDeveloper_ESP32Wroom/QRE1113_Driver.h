@@ -11,8 +11,8 @@ public:
 	int currSteps = 0, lastSteps = 0;
 
 	//This mean that sensors have to be calibrated on every car
-	int minUnder = 3790; //under which value will be considered 0 (0-4095)
-	int maxUp = 3800;	 //values up to this variable will be considered 1
+	int minUnder = 2500; //under which value will be considered 0 (0-4095)
+	int maxUp = 3000;	 //values up to this variable will be considered 1
 
 	QRE1113(int pin)
 	{
