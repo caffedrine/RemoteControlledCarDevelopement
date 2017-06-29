@@ -92,8 +92,12 @@ void loop()
 	//*/
 	if (Serial.available() > 0)
 	{
-		parseData(Serial.readString());
-		execute_command();
+		String data = Serial.readString();
+
+		if (!parseData(data))
+			Serial.println("Failed to parse!");
+		if (!execute_command())
+			Serial.println("Failed to execute!");
 	}
 
 	/*
@@ -120,6 +124,7 @@ bool parseData(String data)
 		return false;
 	}
 
+	//Geting string between barrecks: [*]
 	data = data.substring(data.indexOf('[') + 1);
 	data = data.substring(0, data.indexOf(']'));
 
