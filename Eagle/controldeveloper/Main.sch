@@ -14367,7 +14367,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="C4" library="resistor" deviceset="C-EU" device="050-025X075" value="10uF"/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
-<part name="RX/TX" library="pinhead" deviceset="PINHD-1X3" device=""/>
+<part name="GD|RX|TX" library="pinhead" deviceset="PINHD-1X3" device=""/>
 <part name="LED1" library="led" deviceset="TLLG4400" device=""/>
 <part name="LED2" library="led" deviceset="TLLG4400" device=""/>
 <part name="R4" library="rcl" deviceset="R-EU_" device="0207/10" value="10k"/>
@@ -14477,7 +14477,7 @@ CMD</text>
 <instance part="GND7" gate="1" x="50.8" y="86.36"/>
 <instance part="C4" gate="G$1" x="76.2" y="106.68"/>
 <instance part="GND8" gate="1" x="76.2" y="96.52"/>
-<instance part="RX/TX" gate="A" x="200.66" y="111.76"/>
+<instance part="GD|RX|TX" gate="A" x="200.66" y="111.76"/>
 <instance part="LED1" gate="G$1" x="205.74" y="73.66"/>
 <instance part="LED2" gate="G$1" x="205.74" y="53.34"/>
 <instance part="R4" gate="G$1" x="195.58" y="58.42"/>
@@ -14675,13 +14675,14 @@ CMD</text>
 <pinref part="ENC_R" gate="A" pin="2"/>
 </segment>
 <segment>
-<pinref part="P+3" gate="VCC" pin="VCC"/>
 <pinref part="ESP_R" gate="A" pin="2"/>
+<pinref part="P+3" gate="VCC" pin="VCC"/>
 <wire x1="165.1" y1="116.84" x2="180.34" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="180.34" y1="116.84" x2="180.34" y2="127" width="0.1524" layer="91"/>
 <pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="180.34" y1="127" x2="180.34" y2="129.54" width="0.1524" layer="91"/>
 <wire x1="167.64" y1="127" x2="180.34" y2="127" width="0.1524" layer="91"/>
+<junction x="180.34" y="127"/>
 </segment>
 </net>
 <net name="LED1" class="0">
@@ -14791,15 +14792,6 @@ CMD</text>
 </net>
 <net name="VDD" class="0">
 <segment>
-<wire x1="17.78" y1="109.22" x2="17.78" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="SUPPLY1" gate="G$1" pin="VDD"/>
-<pinref part="U3" gate="G$1" pin="VBUS"/>
-<pinref part="C5" gate="G$1" pin="+"/>
-<wire x1="-5.08" y1="109.22" x2="7.62" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="7.62" y1="111.76" x2="7.62" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="7.62" y1="109.22" x2="17.78" y2="109.22" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="43.18" y1="111.76" x2="38.1" y2="111.76" width="0.1524" layer="91"/>
 <pinref part="C6" gate="G$1" pin="+"/>
 <wire x1="38.1" y1="109.22" x2="38.1" y2="111.76" width="0.1524" layer="91"/>
@@ -14814,10 +14806,20 @@ CMD</text>
 <wire x1="7.62" y1="63.5" x2="7.62" y2="73.66" width="0.1524" layer="91"/>
 <pinref part="SUPPLY3" gate="G$1" pin="VDD"/>
 </segment>
+<segment>
+<pinref part="U3" gate="G$1" pin="VBUS"/>
+<pinref part="C5" gate="G$1" pin="+"/>
+<wire x1="-5.08" y1="109.22" x2="7.62" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="7.62" y1="109.22" x2="7.62" y2="111.76" width="0.1524" layer="91"/>
+<pinref part="SUPPLY1" gate="G$1" pin="VDD"/>
+<wire x1="7.62" y1="109.22" x2="17.78" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="109.22" x2="17.78" y2="116.84" width="0.1524" layer="91"/>
+<junction x="7.62" y="109.22"/>
+</segment>
 </net>
 <net name="N$5" class="0">
 <segment>
-<pinref part="RX/TX" gate="A" pin="1"/>
+<pinref part="GD|RX|TX" gate="A" pin="1"/>
 <pinref part="ESP_R" gate="A" pin="4"/>
 <wire x1="198.12" y1="114.3" x2="165.1" y2="114.3" width="0.1524" layer="91"/>
 </segment>
@@ -14825,13 +14827,13 @@ CMD</text>
 <net name="N$6" class="0">
 <segment>
 <pinref part="ESP_R" gate="A" pin="6"/>
-<pinref part="RX/TX" gate="A" pin="2"/>
+<pinref part="GD|RX|TX" gate="A" pin="2"/>
 <wire x1="165.1" y1="111.76" x2="198.12" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$8" class="0">
 <segment>
-<pinref part="RX/TX" gate="A" pin="3"/>
+<pinref part="GD|RX|TX" gate="A" pin="3"/>
 <pinref part="ESP_R" gate="A" pin="8"/>
 <wire x1="198.12" y1="109.22" x2="165.1" y2="109.22" width="0.1524" layer="91"/>
 </segment>
@@ -14843,11 +14845,7 @@ CMD</text>
 <approved hash="113,1,18.0171,59.8212,OUT,,,,,"/>
 <approved hash="113,1,45.4829,59.8212,IN,,,,,"/>
 <approved hash="113,1,-10.9825,58.5512,M_OUT,,,,,"/>
-<approved hash="113,1,50.8,107.163,IC2,,,,,"/>
-<approved hash="113,1,180.577,110.621,RX/TX,,,,,"/>
 <approved hash="113,1,-6.31022,103.782,U3,,,,,"/>
-<approved hash="113,1,105.368,108.081,ESP_L,,,,,"/>
-<approved hash="113,1,143.468,108.081,ESP_R,,,,,"/>
 </errors>
 </schematic>
 </drawing>
