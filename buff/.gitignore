@@ -54,12 +54,13 @@ local.properties
 .scala_dependencies
 .worksheet
 
-*/
-*/*
-.*/*
-*.
-!.gitignore
-!README.md
-
+.settings/
+bin/
+dll/
+doc/
+lib/
+src/
+.classpath
+.project
 
 
