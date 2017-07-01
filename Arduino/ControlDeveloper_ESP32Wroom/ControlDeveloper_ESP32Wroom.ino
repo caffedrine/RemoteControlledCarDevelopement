@@ -18,6 +18,13 @@ QRE1113 rightEncoder(34);
 void parseData();
 void updateEncoders();
 
+//Define a enum to differentiate right side and left side
+enum SIDE
+{
+	LEFT,
+	RIGHT
+};
+
 //Commands structure and create a variable
 struct Command
 {
@@ -38,8 +45,8 @@ void setup()
 	Serial.println("---STARTING---");
 
 	//initialize motors
-	motors.attachM1Pin(25, 14);	// en, ph
-	motors.attachM2Pin(26, 27);	// en, ph
+	motors.attachM1Pin(25, 14);	// en, ph	-> left motor
+	motors.attachM2Pin(26, 27);	// en, ph	-> right motor
 	motors.init();
 
 	//initialize connection
@@ -244,3 +251,16 @@ void command_pause()
 
 	Serial.println("SUCCESS\n");
 }
+
+void computeSteps(int nr_steps, SIDE s)
+{
+	if (s == SIDE::LEFT)
+	{
+	}
+	else
+	{
+
+	}
+}
+
+
