@@ -39,8 +39,8 @@ void setup()
     Serial.println("---STARTING---");
 
     //initialize motors
-    motors.attachM1Pin(25, 14);
-    motors.attachM2Pin(26, 27);
+	motors.attachM1Pin(25, 26);	// en, ph	-> left motor
+	motors.attachM2Pin(27, 14);	// en, ph	-> right motor
     motors.init();
 
     

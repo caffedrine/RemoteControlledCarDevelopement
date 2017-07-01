@@ -35,7 +35,8 @@ struct Command
 	int nrSteps;
 	int nrRepetition;
 
-	//private data regarding command
+	//private data regarding command execution
+	//Make this false when command was executed and make true when command was received
 	bool updated = false;
 }command;
 
@@ -45,9 +46,10 @@ void setup()
 	Serial.println("---STARTING---");
 
 	//initialize motors
-	motors.attachM1Pin(25, 14);	// en, ph	-> left motor
-	motors.attachM2Pin(26, 27);	// en, ph	-> right motor
+	motors.attachM1Pin(25, 26);	// en, ph	-> left motor
+	motors.attachM2Pin(27, 14);	// en, ph	-> right motor
 	motors.init();
+	motors.brake();
 
 	//initialize connection
 	//conn::setupAP();
@@ -107,12 +109,12 @@ void loop()
 			Serial.println("Failed to execute!");
 	}
 
-	/*
-	int left = analogRead(4);
-	int right = analogRead(34);
-	printPeriodicData(to_string(left) + " " + to_string(right), 50);
-	//*/
+	//computeSteps(10, 3000, SIDE::LEFT);
+	motors.setM1Speed(-3000);
+	motors.setM2Speed(3000);
 
+
+	/*
 	//Display encoders steps
 	if (leftEncoder.currSteps != leftEncoder.lastSteps)
 		Serial.println("Left steps: " + to_string(leftEncoder.currSteps));
@@ -235,7 +237,9 @@ void command_repetition()
 
 	//Repetition? Not sure...
 
+	command.updated = false;
 	Serial.println("SUCCESS\n");
+
 }
 
 void command_pause()
@@ -247,19 +251,31 @@ void command_pause()
 	delay(command.duration);
 
 	//Set this marker to show when new commands were received
-	command.updated = true;
+	command.updated = false;
 
 	Serial.println("SUCCESS\n");
 }
 
-void computeSteps(int nr_steps, SIDE s)
+bool computeSteps(int nr_steps, int speed, int motor)
 {
-	if (s == SIDE::LEFT)
-	{
-	}
-	else
-	{
+	//Update encoders values
+	leftEncoder.update();
+	rightEncoder.update();
 
+	if (motor == SIDE::LEFT)
+	{
+		//This mean we have to work with left motor
+		//Calculate number of steps relative to current number of steps
+		static int lastStep = nr_steps + leftEncoder.currVal;
+
+
+		if (leftEncoder.currVal < lastStep)	// if we didn't reach last step, continue rotating
+			motors.setM1Speed(speed);
+		else
+		{
+			//We already made the seps we wanted thus we stop motors
+			motors.setM1Speed(0);
+		}
 	}
 }
 
