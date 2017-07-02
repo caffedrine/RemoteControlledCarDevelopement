@@ -15,8 +15,8 @@ class DRV8835
 public:
 	void init();
 
-	void attachM1Pin(uint8_t en, uint8_t ph);
-	void attachM2Pin(uint8_t en, uint8_t ph);
+	void attachM1Pin(uint8_t en, uint8_t ph, bool rev = false);
+	void attachM2Pin(uint8_t en, uint8_t ph, bool rev = false);
 
 	void setM1Speed(int speed);
 	void setM2Speed(int speed);
@@ -29,6 +29,7 @@ private:
 			M1ph = 0, M1phCH = 1,
 			M2en = 0, M2enCH = 2,
 			M2ph = 0, M2phCH = 3;
+	bool M1rev = false, M2rev = false;
 
 
 	void ledcAnalogWrite(uint8_t channel, int  value, int valueMax = 4095);

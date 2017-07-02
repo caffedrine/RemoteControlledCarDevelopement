@@ -18,8 +18,8 @@ void DRV8835::init()
 
 	//Configuring ledc for motor 2
 	//M2 EN pin
-	ledcSetup(this->M1enCH, 5000, 13);
-	ledcAttachPin(this->M2en, this->M1enCH);
+	ledcSetup(this->M2enCH, 5000, 13);
+	ledcAttachPin(this->M2en, this->M2enCH);
 	//M2 PH pin
 	ledcSetup(this->M2phCH, 5000, 13);
 	ledcAttachPin(this->M2ph, this->M2phCH);

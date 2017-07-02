@@ -18,8 +18,8 @@ void DRV8835::init()
 
 	//Configuring ledc for motor 2
 	//M2 EN pin
-	ledcSetup(this->M1enCH, 5000, 13);
-	ledcAttachPin(this->M2en, this->M1enCH);
+	ledcSetup(this->M2enCH, 5000, 13);
+	ledcAttachPin(this->M2en, this->M2enCH);
 	//M2 PH pin
 	ledcSetup(this->M2phCH, 5000, 13);
 	ledcAttachPin(this->M2ph, this->M2phCH);
@@ -97,4 +97,10 @@ void DRV8835::ledcAnalogWrite(uint8_t channel, int value, int max)
 
 	// write duty to LEDC
 	ledcWrite(channel, duty);
+}
+
+void DRV8835::brake()
+{
+	this->setM1Speed(0);
+	this->setM2Speed(0);
 }

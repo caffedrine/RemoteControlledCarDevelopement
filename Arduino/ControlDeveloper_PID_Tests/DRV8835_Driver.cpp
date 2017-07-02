@@ -18,8 +18,8 @@ void DRV8835::init()
 
 	//Configuring ledc for motor 2
 	//M2 EN pin
-	ledcSetup(this->M1enCH, 5000, 13);
-	ledcAttachPin(this->M2en, this->M1enCH);
+	ledcSetup(this->M2enCH, 5000, 13);
+	ledcAttachPin(this->M2en, this->M2enCH);
 	//M2 PH pin
 	ledcSetup(this->M2phCH, 5000, 13);
 	ledcAttachPin(this->M2ph, this->M2phCH);
@@ -36,20 +36,26 @@ void DRV8835::init()
 	this->initialised = true;
 }
 
-void DRV8835::attachM1Pin(uint8_t en, uint8_t ph)
+void DRV8835::attachM1Pin(uint8_t en, uint8_t ph, bool rev)
 {
 	this->M1en = en;
 	this->M1ph = ph;
+	this->M1rev = rev;
 }
 
-void DRV8835::attachM2Pin(uint8_t en, uint8_t ph)
+void DRV8835::attachM2Pin(uint8_t en, uint8_t ph, bool rev)
 {
 	this->M2en = en;
 	this->M2ph = ph;
+	this->M2rev = rev;
 }
 
 void DRV8835::setM1Speed(int speed)
 {
+	//if reversed just change speed
+	if (this->M1rev)
+		speed *= -1;
+
 	//Let me be clear: [en = HIGH, ph = LOW] = forward
  	//				   [en = LOW, ph = HIGH] = backward
 
@@ -71,6 +77,10 @@ void DRV8835::setM1Speed(int speed)
 
 void DRV8835::setM2Speed(int speed)
 {
+	//if reversed just change speed
+	if (this->M2rev)
+		speed *= -1;
+
 	//Let me be clear: [en = HIGH, ph = LOW] = forward
  	//				   [en = LOW, ph = HIGH] = backward
 

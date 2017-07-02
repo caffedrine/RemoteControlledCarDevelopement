@@ -21,6 +21,8 @@ public:
 	void setM1Speed(int speed);
 	void setM2Speed(int speed);
 
+	void brake();
+
 private:
 	bool initialised = false;
 	uint8_t M1en = 0, M1enCH = 0,
