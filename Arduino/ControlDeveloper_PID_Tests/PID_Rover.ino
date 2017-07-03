@@ -57,6 +57,7 @@ void loop()
 			speed = 0;
 			slaveSpeed = 0;
 			motors.brake();
+			delay(1000);	//give time to stop
 		}
 		else
 		{
@@ -111,8 +112,13 @@ void updateSlaveMotor(int ms)
 		prevMillis = millis();
 
 		//We need a buffer to absorb high variations
-		int buffer = 370;	//value calibrated with half of speed (50) - this is a magic value to get a stable movement - this is an empirical value
+		int buffer = 300;	//value calibrated with half of speed (50) - this is a magic value to get a stable movement - this is an empirical value
 		//buffer = map(power, 0, 100, buffer / 4, buffer + 3*(buffer / 4));	//mapping buffer for every value
+
+		//Use these values to prevent whel droping from max_motor to min_motor;
+		//In other words, if master speed is 1000, slave speed bust be [800, 1200] but not outside.
+		int min_variation = speed - 500; if (min_variation < motor_min) min_variation = motor_min;
+		int max_variation = speed + 500; if (max_variation > motor_max) max_variation = motor_max;
 
 		//Try to change R_motor speed in respect with L_motor
 		if (rightEncoder.currSteps < leftEncoder.currSteps)
@@ -123,15 +129,15 @@ void updateSlaveMotor(int ms)
 
 			//Now use error to change speed
 			slaveSpeed += error;
-			if (slaveSpeed > motor_max)
+			if (slaveSpeed > max_variation)
 			{
 				//speed -= error;
-				slaveSpeed = motor_max - buffer; // -> this value is magic ^_^
+				slaveSpeed = max_variation - buffer; // -> this value is magic ^_^
 			}
 			if (speed < 0)	//if speed  <  0 we can't decreasse speed outside min and max
 			{
-				if (slaveSpeed > (motor_min*-1))
-					slaveSpeed = (motor_min*-1) - buffer;
+				if (slaveSpeed > (min_variation*-1))
+					slaveSpeed = (min_variation*-1) - buffer;
 			}
 		}	
 
@@ -143,14 +149,14 @@ void updateSlaveMotor(int ms)
 
 			//Now use error to change the slave speed
 			slaveSpeed -= error;
-			if (slaveSpeed < (motor_max*-1))
+			if (slaveSpeed < (max_variation*-1))
 			{
-				slaveSpeed = (motor_max*-1) + buffer;
+				slaveSpeed = (max_variation*-1) + buffer;
 			}
 			if (speed > 0)
 			{
-				if (slaveSpeed < motor_min)
-					slaveSpeed = motor_min + buffer;
+				if (slaveSpeed < min_variation)
+					slaveSpeed = min_variation + buffer;
 			}
 		}
 
