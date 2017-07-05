@@ -6,7 +6,7 @@
 #include "my_util.h"
 
 //Motor object
-DRV8835 motors;
+DRV8835 motors;		//Data structure and drivers for motors
 
 //Encoders (IR Sensor: QRE1113)
 QRE1113 leftEncoder(4);
@@ -15,9 +15,12 @@ QRE1113 rightEncoder(34);
 //Some prototypes
 void printEncoderSpeed(int timeBase = 1000);
 void updateSlaveMotor(int ms = 10);
+void computeSteps(int steps, int m1Dir = DRV8835::FORWARD, int m2 = -1, int m2Dir = DRV8835::FORWARD);
+void mapSpeed(int power);
 
-#define motor_min 2600
-#define motor_max 3900
+
+#define motor_min 2600	//the minimul value motors starts to rotate
+#define motor_max 3900	//maximum speed which can be send to motors
 
 void setup()
 {
@@ -29,13 +32,16 @@ void setup()
 	motors.attachM1Pin(26, 27);	// en, ph	-> left motor
 	motors.attachM2Pin(25, 14, true/* reverse direction in case you don't want to switch wires*/);	// en, ph	-> right motor
 	motors.init();	//init motors and pins
-	delay(1500);	//To make sure motors are stopped
+	motors.brake();
+
+	delay(2000);	//To make sure motors are stopped
 }
 
-int power = 0;	//power is received from client [0-100]
-int speed = 0;	//max 100, min -100
-int slaveSpeed = 0;
-int atenuator = 400;
+int power = 0;			//power is received from client [0-100]
+int speed = 0;			//max 100, min -100
+int slaveSpeed = 0;		//slave speed
+int atenuator = 400;	//empiric value to get smooth movement
+
 void loop()
 {
 	//Update encoders values
@@ -49,40 +55,19 @@ void loop()
 		leftEncoder.currSteps = 0;
 		rightEncoder.currSteps = 0;
 
+		//map power to speed and all the stuff
 		power = to_int(Serial.readString());
-		power = map(power, 0, 100, 40, 80);	//for this interval PID algorithm is ideal                                                                                                                           power = 50;
-		if (power == 0)
-		{
-			speed = 0;
-			slaveSpeed = 0;
-			motors.brake();
-			delay(1000);	//give time to stop
-		}
-		else
-		{
-			//Maping readed value to 13 bits. Starts with ~2500 as it is the value motors starts to rotate
-			if (power < 0)
-				speed = map(power, -100, 0, motor_max*-1, motor_min*-1);
-			else
-				speed = map(power, 0, 100, motor_min, motor_max);
+		mapSpeed(power);
 
-			//Init slave speed with the same value and then correct error on feedback loop
-			slaveSpeed = speed;
-		}
+		computeSteps(power, DRV8835::FORWARD, 1, DRV8835::FORWARD);
 	}
 
-	//We set th same speed on both motors so we want same speed at output
-	motors.setM1Speed(speed);	//Update motor 1 (left) and adapt motor 2 by this speed
-	//motors.setM2Speed(speed);
-	updateSlaveMotor(0);		//updating slave motor
+	//We set the same speed on both motors so we want same speed at output
+	//motors.setM1Speed(speed);	//Update motor 1 (left) and adapt motor 2 by this speed
+	//updateSlaveMotor(0);		//updating slave motor
 
-	//Print speed periodically
-	//printPeriodicData("Speed: " + to_string(speed) + "  Slave speed: " + to_string(slaveSpeed), 1000);
-	printEncoderSpeed(250);
-
-	
-
-	//*/
+	//Print debug data every 250 miliseconds
+	printEncoderSpeed(250);	
 }
 
 void printEncoderSpeed(int timeBase)
@@ -159,6 +144,152 @@ void updateSlaveMotor(int ms)
 		}
 	}
 	//Now we have to send value calculated to motor
+	
+	//However...
+	if (speed == 0)
+		slaveSpeed = 0;
+
 	motors.setM2Speed(slaveSpeed);
 }
 
+void mapSpeed(int power)
+{
+	if (power == 0)
+	{
+		speed = 0;
+		slaveSpeed = 0;
+		motors.brake();
+		delay(1000);	//give time to stop
+	}
+	else
+	{
+		//Maping readed value to 13 bits. Starts with ~2500 as it is the value motors starts to rotate
+		if (power < 0)
+		{
+			power = map(power, -100, 0, -80, -40);	//for this interval PID algorithm is ideal
+			speed = map(power, -100, 0, motor_max*-1, motor_min*-1);
+		}
+		else
+		{
+			power = map(power, 0, 100, 40, 80);	//for this interval PID algorithm is ideal
+			speed = map(power, 0, 100, motor_min, motor_max);
+		}
+
+		//Init slave speed with the same value and then correct error on feedback loop
+		slaveSpeed = speed;
+	}
+}
+
+/**
+	By default compute steps only for motor M1. But you can compute steps in paralel in both motors if m2 != -1
+	No status updates when using this function
+*/
+void computeSteps(int steps, int m1Dir, int m2, int m2Dir)
+{
+	//reset encoders
+	leftEncoder.currSteps = 0;
+	rightEncoder.currSteps = 0;
+
+	//Perform direction with that speed
+	power = 10;			//lower speed to prevent inertia
+	mapSpeed(power);
+
+	//Keep motor rotating until we reach the target
+	do
+	{
+		motors.setM1Speed(speed*m1Dir);
+		if (m2 != -1)
+		{
+			slaveSpeed *= m2Dir;
+			updateSlaveMotor(0);		//use PID to stabilize in respect with main motor - why not
+		}
+		leftEncoder.update();
+		rightEncoder.update();
+
+	} while (leftEncoder.currSteps < steps && rightEncoder.currSteps < steps);
+
+	//The rest of the code apply if two motors were set. If you wanted to compute speed for only one motor, then we stop here! Job was done
+	if (m2 == -1)	//no m2
+	{
+		//brake first
+		motors.setM1Speed(speed*m1Dir*-1);
+		delay(25);
+		motors.setM1Speed(0);
+
+		mapSpeed(0);	//set speed to 0 as it was changed
+		return;
+	}
+
+	//At least one of motors finished the job. 
+	//Next we check if both motors made required steps else finish the job on correct motor
+	
+
+
+	//Both motors made theis job so brake them bots
+	if (leftEncoder.currSteps == steps && rightEncoder.currSteps == steps)	// 0.000001 probability to reach this but just in case
+	{
+		motors.setM1Speed(speed*m1Dir*-1);	//force brake to prevent intertia
+		motors.setM2Speed(speed*m2Dir*-1);
+		delay(25);						//motors needs some time to stop
+		motors.brake();					//act brakes
+	}
+	else
+	{
+		//We need to brake the motor which finished the job
+		if (leftEncoder.currSteps == steps)
+		{
+			motors.setM1Speed(speed*m1Dir*-1);
+			delay(25);
+			motors.setM1Speed(0);
+		}
+
+		if (rightEncoder.currSteps == steps)
+		{
+			motors.setM2Speed(speed*m2Dir*-1);
+			delay(25);
+			motors.setM2Speed(0);
+		}
+	}
+
+	//Check if right motor have to do some more steps
+	if (rightEncoder.currSteps < steps)
+	{
+		//make some steps using right motor
+		do
+		{
+			motors.setM2Speed(speed*m2Dir);
+			leftEncoder.update();
+			rightEncoder.update();
+
+		} while (rightEncoder.currSteps < steps);
+
+		//brake time
+		motors.setM2Speed(speed*m2Dir*-1);
+		delay(25);
+		motors.setM2Speed(0);
+	}
+
+	//Check if left motor have to do some more steps
+	if (leftEncoder.currSteps < steps)	//if left motors have to do some more steps
+	{
+		//left motor need so make some more steps
+		do
+		{
+			//set speed on motor
+			motors.setM1Speed(speed*m1Dir);
+
+			//It is recommended to update booth encoders
+			leftEncoder.update();
+			rightEncoder.update();
+
+		} while (leftEncoder.currSteps < steps);
+		
+		//brake after job is done
+		motors.setM1Speed(speed*m1Dir*-1);
+		delay(25);
+		motors.setM1Speed(0);
+	}
+
+	//Make power low again
+	mapSpeed(0);
+}
