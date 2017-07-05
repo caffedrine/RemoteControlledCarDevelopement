@@ -14,7 +14,7 @@ QRE1113 rightEncoder(34);
 
 //Some prototypes
 void printEncoderSpeed(int timeBase = 1000);
-void updateSlaveMotor(int ms = 10);
+void updateSlaveMotor(int ms = 0);
 void computeSteps(int steps, int m1Dir = DRV8835::FORWARD, int m2 = -1, int m2Dir = DRV8835::FORWARD);
 void mapSpeed(int power);
 
@@ -40,7 +40,6 @@ void setup()
 int power = 0;			//power is received from client [0-100]
 int speed = 0;			//max 100, min -100
 int slaveSpeed = 0;		//slave speed
-int atenuator = 400;	//empiric value to get smooth movement
 
 void loop()
 {
@@ -59,7 +58,11 @@ void loop()
 		power = to_int(Serial.readString());
 		mapSpeed(power);
 
-		computeSteps(power, DRV8835::FORWARD, 1, DRV8835::FORWARD);
+		//Test cumputeSteps(...) function
+		if (power < 0)
+			computeSteps(power*-1, DRV8835::BACKWARD, 1, DRV8835::FORWARD);
+		else
+			computeSteps(power, DRV8835::FORWARD, 1, DRV8835::BACKWARD);
 	}
 
 	//We set the same speed on both motors so we want same speed at output
@@ -90,17 +93,32 @@ void printEncoderSpeed(int timeBase)
 
 void updateSlaveMotor(int ms)
 {
+	int changeSlaveSpeedFlag = 1, changeMainSpeedFlag = 1;	//by default, direction is 1, FORWARD
 	static int prevMillis = 0;
 	if (millis() - prevMillis > ms)
 	{
 		prevMillis = millis();
+		
+		//Sometime slave motor mai have to rotate in oposite direction
+		if (slaveSpeed < 0)
+		{
+			slaveSpeed *= -1;		//make it positive
+			changeSlaveSpeedFlag = -1;	//set a flag to know that we changed the direction
+		}
+
+		if (speed < 0)	//we work only with positive speeds - we'll reverse that speed at the end
+		{
+			changeMainSpeedFlag = -1;
+			speed *= -1;
+		}
+
 		//We need a buffer to absorb high variations
 		int buffer = 350;	//value calibrated with half of speed (50) - this is a magic value to get a stable movement - this is an empirical value
 		buffer = map(power, 0, 100, 200, 450 );	//mapping buffer for every value
 
 		//Use these values to prevent whel droping from max_motor to min_motor;
 		//In other words, if master speed is 1000, slave speed bust be [800, 1200] but not outside.
-		int min_variation = speed - 400; if (min_variation < motor_min) min_variation = motor_min - 300;
+		int min_variation = speed - 400; if (min_variation < motor_min) min_variation = motor_min - 100;
 		int max_variation = speed + 400; if (max_variation > motor_max) max_variation = motor_max + 100;
 
 		//Try to change R_motor speed in respect with L_motor
@@ -112,18 +130,13 @@ void updateSlaveMotor(int ms)
 
 			//Now use error to change speed
 			slaveSpeed += error;
-			if (slaveSpeed > max_variation)
+
+			if (slaveSpeed > max_variation)		//if slaveSpeed is going up to much
 			{
 				//speed -= error;
 				slaveSpeed = max_variation - buffer; // -> this value is magic ^_^
 			}
-			if (speed < 0)	//if speed  <  0 we can't decreasse speed outside min and max
-			{
-				if (slaveSpeed > (min_variation*-1))
-					slaveSpeed = (min_variation*-1) - buffer;
-			}
 		}	
-
 		else if (rightEncoder.currSteps > leftEncoder.currSteps)
 		{
 			//We have to decreassse R_motor
@@ -132,14 +145,10 @@ void updateSlaveMotor(int ms)
 
 			//Now use error to change the slave speed
 			slaveSpeed -= error;
-			if (slaveSpeed < (max_variation*-1))
+
+			if (slaveSpeed <  min_variation)
 			{
-				slaveSpeed = (max_variation*-1) + buffer;
-			}
-			if (speed > 0)
-			{
-				if (slaveSpeed < min_variation)
-					slaveSpeed = min_variation + buffer;
+				slaveSpeed = min_variation + buffer;
 			}
 		}
 	}
@@ -149,6 +158,9 @@ void updateSlaveMotor(int ms)
 	if (speed == 0)
 		slaveSpeed = 0;
 
+	//Reverse changes as initially
+	speed		*= changeMainSpeedFlag;
+	slaveSpeed	*= changeSlaveSpeedFlag;
 	motors.setM2Speed(slaveSpeed);
 }
 
@@ -186,6 +198,9 @@ void mapSpeed(int power)
 */
 void computeSteps(int steps, int m1Dir, int m2, int m2Dir)
 {
+	if (steps <= 0)
+		return;
+
 	//reset encoders
 	leftEncoder.currSteps = 0;
 	rightEncoder.currSteps = 0;
@@ -202,12 +217,13 @@ void computeSteps(int steps, int m1Dir, int m2, int m2Dir)
 		{
 			slaveSpeed *= m2Dir;
 			updateSlaveMotor(0);		//use PID to stabilize in respect with main motor - why not
+			slaveSpeed *= m2Dir;		//reverse speed so next time won't be negative
 		}
 		leftEncoder.update();
 		rightEncoder.update();
 
 	} while (leftEncoder.currSteps < steps && rightEncoder.currSteps < steps);
-
+	
 	//The rest of the code apply if two motors were set. If you wanted to compute speed for only one motor, then we stop here! Job was done
 	if (m2 == -1)	//no m2
 	{
@@ -223,8 +239,6 @@ void computeSteps(int steps, int m1Dir, int m2, int m2Dir)
 	//At least one of motors finished the job. 
 	//Next we check if both motors made required steps else finish the job on correct motor
 	
-
-
 	//Both motors made theis job so brake them bots
 	if (leftEncoder.currSteps == steps && rightEncoder.currSteps == steps)	// 0.000001 probability to reach this but just in case
 	{
@@ -291,5 +305,5 @@ void computeSteps(int steps, int m1Dir, int m2, int m2Dir)
 	}
 
 	//Make power low again
-	mapSpeed(0);
+	mapSpeed(0);//*/
 }

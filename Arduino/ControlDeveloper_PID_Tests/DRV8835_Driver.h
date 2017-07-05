@@ -11,7 +11,7 @@ public:
 	typedef enum DIRECTIONS
 	{
 		FORWARD = 1,
-		BACKWARD = -1,	//it's easiet to do speed*direction to get right speed value
+		BACKWARD = -1,	//it's easier to do speed*direction to get right speed value
 	}DIRECTIONS;
 
 	void init();
