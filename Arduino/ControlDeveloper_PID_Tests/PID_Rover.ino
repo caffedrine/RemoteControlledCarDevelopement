@@ -73,6 +73,10 @@ void loop()
 	printEncoderSpeed(250);	
 }
 
+/**
+	@brief Print data periodically! Easy to observe errors when building control algoritm.
+	@param[in] timeBase This is time in miliseconds how often you want to display data to serial console!
+*/
 void printEncoderSpeed(int timeBase)
 {
 	static int prevMillis = 0;
@@ -91,6 +95,15 @@ void printEncoderSpeed(int timeBase)
 	}
 }
 
+/**
+	@brief This is the function which correct the errors of slave motor!
+	In other words, M1 is automatically updated with speed given by user. M2 speed is adjustes so that keeps the same speed with master motor (M1).
+	This must be done because motors won't rotate with the same speed for same analog output values.
+
+	@param[in] ms This is how often you want to check for errors on movement and try to correct them. Default value is 0. Check and correct errors as fast as possible.
+	For bigger steps this value mai be increased to 10ms for example.
+	PS: miliseconds!!
+*/
 void updateSlaveMotor(int ms)
 {
 	int changeSlaveSpeedFlag = 1, changeMainSpeedFlag = 1;	//by default, direction is 1, FORWARD
@@ -164,6 +177,11 @@ void updateSlaveMotor(int ms)
 	motors.setM2Speed(slaveSpeed);
 }
 
+/**
+	@brief Translate the power received from user and map, translate and corelate with local variables speed and slaveSpeed
+	@param[in] power This is the power received from uset. It have to be in interval [0-100], where 0 means breake and 100 means full speed
+	This function should be called everytime a command from user is received
+*/
 void mapSpeed(int power)
 {
 	if (power == 0)
@@ -193,8 +211,14 @@ void mapSpeed(int power)
 }
 
 /**
+	@brief This function compute a number of steps in directions given
 	By default compute steps only for motor M1. But you can compute steps in paralel in both motors if m2 != -1
-	No status updates when using this function
+	No status updates when using this function!
+	@param[in] steps Number of steps to be executed
+	@param[in] m1Dir Optional parameter to specify direction of M1
+	@param[in] m2 When != -1, steps will also be computed on second motor, in parallel with M1
+	@param[in] m2Dir Optional parameter to specify direction of motor2
+	The direction should be provided like this: DRV8835::DIRECTIONS::FORWARD, DRV8835::DIRECTIONS::BACKWARD
 */
 void computeSteps(int steps, int m1Dir, int m2, int m2Dir)
 {
