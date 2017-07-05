@@ -8,3 +8,9 @@
 
 # Final PCB
 ![final_pcb](board.png)
+
+# Physical PCB
+![pcb](pcb.jpg)
+
+# Physical Board
+![pcb](pcb_finished.jpg)
