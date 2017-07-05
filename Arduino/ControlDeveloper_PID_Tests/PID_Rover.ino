@@ -49,9 +49,8 @@ void loop()
 		leftEncoder.currSteps = 0;
 		rightEncoder.currSteps = 0;
 
-		//atenuator = to_int(Serial.readString());
 		power = to_int(Serial.readString());
-		//                                                                                                                            power = 50;
+		power = map(power, 0, 100, 40, 80);	//for this interval PID algorithm is ideal                                                                                                                           power = 50;
 		if (power == 0)
 		{
 			speed = 0;
@@ -94,8 +93,8 @@ void printEncoderSpeed(int timeBase)
 	if (millis() - prevMillis >= timeBase)
 	{
 		prevMillis = millis();
-		Serial.println("L: " + to_string(leftEncoder.currSteps - L_prev_steps) + "/s (" + to_string(speed) + ") Count: " + to_string(leftEncoder.currSteps)
-			+ "\nR: " + to_string(rightEncoder.currSteps - R_prev_steps) + "/s (" + to_string(slaveSpeed) + ") Count: " + to_string(rightEncoder.currSteps)
+		Serial.println("L: " + to_string(leftEncoder.currSteps - L_prev_steps) + "/t (" + to_string(speed) + ") Count: " + to_string(leftEncoder.currSteps)
+			+ "\nR: " + to_string(rightEncoder.currSteps - R_prev_steps) + "/t (" + to_string(slaveSpeed) + ") Count: " + to_string(rightEncoder.currSteps)
 			+ " ERR: " + to_string(rightEncoder.currSteps - leftEncoder.currSteps));
 		
 		//Updating with last values. We'll need'em next time.
@@ -110,15 +109,14 @@ void updateSlaveMotor(int ms)
 	if (millis() - prevMillis > ms)
 	{
 		prevMillis = millis();
-
 		//We need a buffer to absorb high variations
-		int buffer = 300;	//value calibrated with half of speed (50) - this is a magic value to get a stable movement - this is an empirical value
-		//buffer = map(power, 0, 100, buffer / 4, buffer + 3*(buffer / 4));	//mapping buffer for every value
+		int buffer = 350;	//value calibrated with half of speed (50) - this is a magic value to get a stable movement - this is an empirical value
+		buffer = map(power, 0, 100, 200, 450 );	//mapping buffer for every value
 
 		//Use these values to prevent whel droping from max_motor to min_motor;
 		//In other words, if master speed is 1000, slave speed bust be [800, 1200] but not outside.
-		int min_variation = speed - 500; if (min_variation < motor_min) min_variation = motor_min;
-		int max_variation = speed + 500; if (max_variation > motor_max) max_variation = motor_max;
+		int min_variation = speed - 400; if (min_variation < motor_min) min_variation = motor_min - 300;
+		int max_variation = speed + 400; if (max_variation > motor_max) max_variation = motor_max + 100;
 
 		//Try to change R_motor speed in respect with L_motor
 		if (rightEncoder.currSteps < leftEncoder.currSteps)
@@ -159,8 +157,8 @@ void updateSlaveMotor(int ms)
 					slaveSpeed = min_variation + buffer;
 			}
 		}
-
-		//Now we have to send value calculated to motor
 	}
+	//Now we have to send value calculated to motor
 	motors.setM2Speed(slaveSpeed);
 }
+

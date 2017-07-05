@@ -349,7 +349,7 @@ UsedLibrary="dependencies/MicroUSB.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="745 320 1711 809"
+Loc="689 97 1655 586"
 State=2
 Number=0
 
