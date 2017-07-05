@@ -2,6 +2,11 @@
 
 Disigning and implementing a remote controlled rover from zero to hero!
 
+# List of components
+Before proceeding, make sure you have the possibility to print the frame of car! It is in folder 3D_Design. Also don't forget to print the wheels!
+
+
+
 # Results
 
 ![final1](docs/final1.jpg)
