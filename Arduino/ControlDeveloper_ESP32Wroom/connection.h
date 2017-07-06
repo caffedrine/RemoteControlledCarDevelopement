@@ -151,11 +151,11 @@ namespace conn
 		{
 			previousMillis = millis();
 
-			pinMode(trafficLedIndicatorPin, INPUT);
-			bool currStatus = digitalRead(5);
+			pinMode(connectionLedIndicatorPin, INPUT);
+			bool currStatus = digitalRead(connectionLedIndicatorPin);
 
-			pinMode(trafficLedIndicatorPin, OUTPUT);
-			digitalWrite(trafficLedIndicatorPin, currStatus?0:1 );
+			pinMode(connectionLedIndicatorPin, OUTPUT);
+			digitalWrite(connectionLedIndicatorPin, currStatus ? 0 : 1);
 		}
 	}
 

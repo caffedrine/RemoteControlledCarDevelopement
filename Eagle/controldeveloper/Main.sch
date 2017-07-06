@@ -14370,8 +14370,8 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="GD|RX|TX" library="pinhead" deviceset="PINHD-1X3" device=""/>
 <part name="LED1" library="led" deviceset="TLLG4400" device=""/>
 <part name="LED2" library="led" deviceset="TLLG4400" device=""/>
-<part name="R4" library="rcl" deviceset="R-EU_" device="0207/10" value="10k"/>
-<part name="R5" library="rcl" deviceset="R-EU_" device="0207/10" value="10k"/>
+<part name="R4" library="rcl" deviceset="R-EU_" device="0207/10" value="0.6k"/>
+<part name="R5" library="rcl" deviceset="R-EU_" device="0207/10" value="0.6k"/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
 <part name="C5" library="rcl" deviceset="CPOL-EU" device="E2.5-6" value="100uF"/>

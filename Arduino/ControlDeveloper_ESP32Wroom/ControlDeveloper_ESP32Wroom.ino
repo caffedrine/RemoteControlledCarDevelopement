@@ -45,8 +45,6 @@ void setup()
 	server.begin();
 	conn::waitForServerClients();
 	//*/
-
-	delay(1000);
 }
 
 void loop()
@@ -54,6 +52,7 @@ void loop()
 	//Updating encoders values
 	leftEncoder.update();
 	rightEncoder.update();
+
 	
 	//Wifi link - check if client is still connected
 	if (!client || !client.connected())
@@ -68,7 +67,7 @@ void loop()
 		//Send feedback to Java App telling that we received command.
 		conn::writeString("Command(s) received...");
 
-		//Try to parse received data
+		//Try to parse received data                                                                                                                                                                                                                                                                                            
 		parseData(recvMsg) ? Serial.println("Data parsed!") : Serial.println("Failed to parse data!");
 		
 		//Try to execute command

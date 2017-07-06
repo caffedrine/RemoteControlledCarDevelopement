@@ -33,7 +33,7 @@
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
@@ -2897,8 +2897,8 @@ design rules under a new name.</description>
 <element name="R1" library="rcl" package="0207/10" value="12k" x="29.05" y="53.93" rot="R180"/>
 <element name="R2" library="rcl" package="0207/10" value="390" x="31.25" y="39.07"/>
 <element name="R3" library="rcl" package="0207/10" value="240" x="31.55" y="36.07"/>
-<element name="R4" library="rcl" package="0207/10" value="10k" x="36.05" y="58.85" rot="R180"/>
-<element name="R5" library="rcl" package="0207/10" value="10k" x="22.75" y="58.85" rot="R180"/>
+<element name="R4" library="rcl" package="0207/10" value="0.6k" x="36.05" y="58.85" rot="R180"/>
+<element name="R5" library="rcl" package="0207/10" value="0.6k" x="22.75" y="58.85" rot="R180"/>
 <element name="GD|RX|TX" library="pinhead" package="1X03" value="" x="51.99" y="43.49" rot="R270"/>
 <element name="U3" library="MicroUSB" package="USB-MICRO-SMD" value="" x="41.08" y="4.06" rot="MR90"/>
 <element name="IC1" library="v-reg" package="317TS" value="" x="41" y="16" rot="R180"/>
