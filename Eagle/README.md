@@ -10,7 +10,10 @@
 ![final_pcb](board.png)
 
 # Physical PCB
-![pcb](pcb.jpg)
+![phisical](pcb.jpg)
 
 # Physical Board
 ![pcb](pcb_finished.jpg)
+
+## Known bug:
+  1. Have to add some transistors to schematic to prevent one of the motors from rotating!!!
