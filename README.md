@@ -4,6 +4,7 @@ Designing and implementing a remote controlled rover from zero to hero!
 
 # List of components
 Before proceeding, make sure you have the possibility to print the frame of car using a 3D Printer! It is in folder 3D_Design. Also don't forget to print the wheels!
+Also make sure you have the possibility to create Printed Circuit Board (PCB).
 
 ### Main components required:
   1. **2x QRE1113** - SparkFun RedBot Sensor - Line Follower
@@ -25,8 +26,18 @@ Before proceeding, make sure you have the possibility to print the frame of car 
   9. **1xUSB Micro B Connector** - http://uk.farnell.com/amphenol-fci/10104110-0001lf/micro-usb-2-0-type-b-receptacle/dp/2293753
 	 
 ### Electrical components:
-	Resistors, some wires to connect sensors. Check out Eagle project.
-	To be updated...
+  1. 1x LM317 Voltage regulator
+  2. 2x Reasonable leds
+  3. 10x Pinheaders Male
+  4. 25x Pinheader Female
+  5. 2x 20 Double Pinheader Female
+  6. 2x Reasonable leds
+  7. 2x 10K Resistors
+  8. 1x 12k Resistors
+  9. *1x 390 Ohm Resistor*
+  10. *1x240 Ohm Resistor*
+  11. Electrolithic capacitors: 1x100uF, 2x220uF or lower.
+  12. Ceramic capacitors: 1x10uF  
 
 ### Components/Tools required to build prototype
   1. **1x FTDI1232** - This is an adapter which allows you to write program to WiFi Module. You can make your own it's not hard but be aware that you need to convert logical levels from USB from [0-5V] to [0-3.3V]
@@ -34,6 +45,11 @@ Before proceeding, make sure you have the possibility to print the frame of car 
   2. **Optional:** If you want to test and debug code easily, you may want to pick up an Sparkfun ESP32 Thing - Developement board. Build code on that board and upload to ESP32-WROOM when it is finished.
      http://www.exp-tech.de/en/sparkfun-esp32-thing?___from_store=de
 
+#### Other components
+Screws, wires, zipties and stuff like this :)
+	 
+**PS: If the links expired, let those guys know: http://web.archive.org **
+	 
 # Results
 
 ![final1](docs/final1.jpg)
