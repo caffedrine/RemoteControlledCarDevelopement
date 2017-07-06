@@ -9,7 +9,7 @@
 DRV8835 motors;		//Data structure and drivers for motors
 
 //Encoders (IR Sensor: QRE1113)
-QRE1113 leftEncoder(4);
+QRE1113 leftEncoder(32);
 QRE1113 rightEncoder(34);
 
 //Some prototypes
@@ -17,7 +17,6 @@ void printEncoderSpeed(int timeBase = 1000);
 void updateSlaveMotor(int ms = 0);
 void computeSteps(int steps, int m1Dir = DRV8835::FORWARD, int m2 = -1, int m2Dir = DRV8835::FORWARD);
 void mapSpeed(int power);
-
 
 #define motor_min 2600	//the minimul value motors starts to rotate
 #define motor_max 3900	//maximum speed which can be send to motors
@@ -59,15 +58,17 @@ void loop()
 		mapSpeed(power);
 
 		//Test cumputeSteps(...) function
+		/*
 		if (power < 0)
 			computeSteps(power*-1, DRV8835::BACKWARD, 1, DRV8835::FORWARD);
 		else
 			computeSteps(power, DRV8835::FORWARD, 1, DRV8835::BACKWARD);
+		*/
 	}
 
 	//We set the same speed on both motors so we want same speed at output
-	//motors.setM1Speed(speed);	//Update motor 1 (left) and adapt motor 2 by this speed
-	//updateSlaveMotor(0);		//updating slave motor
+	motors.setM1Speed(speed);	//Update motor 1 (left) and adapt motor 2 by this speed
+	updateSlaveMotor(0);		//updating slave motor
 
 	//Print debug data every 250 miliseconds
 	printEncoderSpeed(250);	

@@ -64,6 +64,7 @@ namespace conn
 
 		pinMode(trafficLedIndicatorPin, OUTPUT);
 		digitalWrite(trafficLedIndicatorPin, LOW);
+		digitalWrite(connectionLedIndicatorPin, LOW);
 	}
 
 	//Loop to wait for clients to open tcp sockets
@@ -94,6 +95,7 @@ namespace conn
 
 		pinMode(trafficLedIndicatorPin, OUTPUT);
 		digitalWrite(trafficLedIndicatorPin, LOW );
+		digitalWrite(connectionLedIndicatorPin, LOW);
 	}
 
 	//Function to write to client TCP socket
@@ -146,16 +148,17 @@ namespace conn
 	//Indicate via leds connection status
 	void connectionLedIndicator()
 	{
+		static bool lastTime = false;	//remember last state of button
 		static long previousMillis = 0;
 		if (millis() - previousMillis > 400)
 		{
 			previousMillis = millis();
 
-			pinMode(connectionLedIndicatorPin, INPUT);
-			bool currStatus = digitalRead(connectionLedIndicatorPin);
-
-			pinMode(connectionLedIndicatorPin, OUTPUT);
-			digitalWrite(connectionLedIndicatorPin, currStatus ? 0 : 1);
+			//pinMode(connectionLedIndicatorPin, INPUT);
+			//bool currStatus = digitalRead(connectionLedIndicatorPin);
+			//pinMode(connectionLedIndicatorPin, OUTPUT);
+			digitalWrite(connectionLedIndicatorPin, !lastTime);
+			lastTime = !lastTime;
 		}
 	}
 

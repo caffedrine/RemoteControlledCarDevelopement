@@ -14711,9 +14711,9 @@ CMD</text>
 </net>
 <net name="ENC_R" class="0">
 <segment>
-<label x="177.8" y="99.06" size="0.8128" layer="95" xref="yes"/>
-<pinref part="ESP_R" gate="A" pin="16"/>
-<wire x1="177.8" y1="99.06" x2="165.1" y2="99.06" width="0.1524" layer="91"/>
+<label x="124.46" y="111.76" size="0.8128" layer="95" xref="yes"/>
+<pinref part="ESP_L" gate="A" pin="6"/>
+<wire x1="111.76" y1="111.76" x2="124.46" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <label x="147.32" y="53.34" size="0.8128" layer="95" xref="yes"/>
@@ -14752,9 +14752,9 @@ CMD</text>
 <label x="50.8" y="58.42" size="0.8128" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="ESP_L" gate="A" pin="9"/>
-<wire x1="104.14" y1="106.68" x2="91.44" y2="106.68" width="0.1524" layer="91"/>
-<label x="91.44" y="106.68" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<label x="91.44" y="111.76" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<pinref part="ESP_L" gate="A" pin="5"/>
+<wire x1="104.14" y1="111.76" x2="91.44" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="EN2" class="0">
@@ -14776,9 +14776,9 @@ CMD</text>
 <label x="50.8" y="53.34" size="0.8128" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="ESP_L" gate="A" pin="7"/>
-<wire x1="104.14" y1="109.22" x2="91.44" y2="109.22" width="0.1524" layer="91"/>
-<label x="91.44" y="109.22" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<label x="91.44" y="104.14" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<pinref part="ESP_L" gate="A" pin="11"/>
+<wire x1="104.14" y1="104.14" x2="91.44" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$12" class="0">

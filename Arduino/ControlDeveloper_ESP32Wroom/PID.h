@@ -8,7 +8,7 @@
 DRV8835 motors;		
 
 //Encoders (IR Sensor: QRE1113)
-QRE1113 leftEncoder(4);
+QRE1113 leftEncoder(32);
 QRE1113 rightEncoder(34);
 
 int power = 0;			//power is received from client [0-100]

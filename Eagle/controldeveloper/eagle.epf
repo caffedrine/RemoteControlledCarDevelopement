@@ -349,10 +349,10 @@ UsedLibrary="dependencies/MicroUSB.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="235 161 1201 650"
-State=2
+Loc="161 184 1127 673"
+State=1
 Number=0
 
 [Desktop]
-Screen="1202 786"
+Screen="1920 1080"
 Window="Win_1"

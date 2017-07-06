@@ -35,8 +35,8 @@ void setup()
 	Serial.println("---STARTING---");
 
 	//initialize motors
-	motors.attachM1Pin(26, 27);			// en, ph	-> left motor
-	motors.attachM2Pin(25, 14, true);	// en, ph	-> right motor
+	motors.attachM1Pin(25, 33, false);			// en, ph	-> left motor
+	motors.attachM2Pin(27, 13, false);	// en, ph	-> right motor
 	motors.init();
 	motors.brake();
 	
@@ -52,7 +52,6 @@ void loop()
 	//Updating encoders values
 	leftEncoder.update();
 	rightEncoder.update();
-
 	
 	//Wifi link - check if client is still connected
 	if (!client || !client.connected())
@@ -77,9 +76,8 @@ void loop()
 			conn::writeString("Command(s) failed (NOT)...");
 	}
 	//*/
-
 	//Allow commands execution from serial
-	if (Serial.available() > 0)
+	if (DEBUG && Serial.available() > 0)
 	{
 		String data = Serial.readString();
 		if (!parseData(data))
@@ -89,8 +87,7 @@ void loop()
 	}
 
 	//Precious debug info
-	if (DEBUG)
-		printEncoderSpeed(500);	//print data every 0.5 seconds
+	if (DEBUG) printEncoderSpeed(500);	//print data every 0.5 seconds
 }
 
 bool parseData(String data)
