@@ -59,7 +59,7 @@ Screws, wires, zipties and stuff like this :)
   1. If you will try to compile Firmware and upload it from a Windows machine, it will take almost half minute (I7 + SSD) for code to be uploaded on ESP board and even more if you have installed an antivirus with ransomware protection enabled. My advice, use Ubuntu when debugging or improving the Firmware. It will be way easy and faster.
   2. Be carefull at battery. A powerbang which provide only 800mA on output may not be be enough. Sometime, when WiFi Radios are enabled on ESP Board, motors and ESP Board need more current feed. When those peaks are reached, ADC ports may get crazy!
   3. If something is not working, connect serial cable and check debug logs received via Serial port. It is enabled by default. 
-  4. 
+  4. If you customize the firmware and Eagle Schematic/PCB, make sure you don't use ANALOG PINS FROM CHANNEL 2 neither DACS. Won't work when radios are enabled. Yes! When WiFi radios are enabled, only ADC pins from channel 1 are usable as ADC Input ports. Of course, you can use those pins as digital or even PWM.
 
 # Known bugs:
   1. Power ON/OFF Button - This is not a bug but such a button is a MUST because some powerbanks may not have such a button and is not ok to connect/disconnect battery whenever you want to start/stop the car...
