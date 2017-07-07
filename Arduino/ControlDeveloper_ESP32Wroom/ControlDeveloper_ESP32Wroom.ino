@@ -35,8 +35,8 @@ void setup()
 	Serial.println("---STARTING---");
 
 	//initialize motors
-	motors.attachM1Pin(25, 33, false);			// en, ph	-> left motor
-	motors.attachM2Pin(27, 13, false);	// en, ph	-> right motor
+	motors.attachM1Pin(25, 33, true);	// en, ph	-> left motor
+	motors.attachM2Pin(27, 13, true);	// en, ph	-> right motor
 	motors.init();
 	motors.brake();
 	
@@ -52,6 +52,7 @@ void loop()
 	//Updating encoders values
 	leftEncoder.update();
 	rightEncoder.update();
+	
 	
 	//Wifi link - check if client is still connected
 	if (!client || !client.connected())
@@ -82,6 +83,10 @@ void loop()
 		String data = Serial.readString();
 		if (!parseData(data))
 			Serial.println("Failed to parse!");
+
+		leftEncoder.currSteps = 0;
+		rightEncoder.currSteps = 0;
+
 		if (!execute_command())
 			Serial.println("Failed to execute!");
 	}
@@ -227,9 +232,45 @@ void command_gear()
 		printEncoderSpeed(500);	//print data every 0.5 seconds -> good for debugging
 	} while(millis() - startTime < command.duration);
 
+	
+	//stop motor which finished his steps - and update encoders to make sure we keep counting
+	int leftSteps = leftEncoder.currSteps;
+	int rightSteps = rightEncoder.currSteps;
+	int error = (leftSteps > rightSteps) ? leftSteps - rightSteps : ( (rightSteps > leftSteps) ? rightSteps - leftSteps : 0);
+	bool m1BrakeEn = false, m2BrakeEn = false;	//remember which motor is stopped
+	/*
+	if (error != 0)
+	{
+		if (leftSteps < rightSteps)	//if left motor needs to make more steps
+		{
+			//motor 1 needs to make some more steps and motor2 needs brake
+			while (leftSteps < rightSteps)
+			{
+				leftEncoder.update();
+				leftSteps = leftEncoder.getSteps();
+				motors.setM1Speed(speed);
+
+				//and stop the other motor
+				motors.setM2Speed(0);
+			}
+		}
+		else	// otherwise rightSteps < leftSteps
+		{
+			while (rightSteps < leftSteps)
+			{
+				rightEncoder.update();
+				rightSteps = rightEncoder.getSteps();
+				motors.setM2Speed(speed);
+
+				//stop the other motor
+				motors.setM1Speed(0);
+			}
+		}
+	}
+	*/
 	//brake motors - no more steps after gear was executed
-	motors.setM1Speed(speed*-1);
-	motors.setM2Speed(speed*-1);
+	if( !m1BrakeEn) motors.setM1Speed(speed*-1);
+	if( !m2BrakeEn) motors.setM2Speed(speed*-1);
 	delay(25);
 
 	mapSpeed(0);		//set speed to 0
@@ -264,6 +305,3 @@ void command_pause()
 
 	Serial.println("SUCCESS\n");
 }
-
-
-

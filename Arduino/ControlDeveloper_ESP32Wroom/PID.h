@@ -8,8 +8,8 @@
 DRV8835 motors;		
 
 //Encoders (IR Sensor: QRE1113)
-QRE1113 leftEncoder(32);
-QRE1113 rightEncoder(34);
+QRE1113 leftEncoder(34);
+QRE1113 rightEncoder(32);
 
 int power = 0;			//power is received from client [0-100]
 int speed = 0;			//max 100, min -100. Positive vals means FORWARD and negative values mean BACKWARD
@@ -33,9 +33,9 @@ void printEncoderSpeed(int timeBase)
 	if (millis() - prevMillis >= timeBase)
 	{
 		prevMillis = millis();
-		Serial.println("L: " + to_string(leftEncoder.currSteps - L_prev_steps) + "/t (" + to_string(speed) + ") Count: " + to_string(leftEncoder.currSteps)
-			+ "\nR: " + to_string(rightEncoder.currSteps - R_prev_steps) + "/t (" + to_string(slaveSpeed) + ") Count: " + to_string(rightEncoder.currSteps)
-			+ " ERR: " + to_string(rightEncoder.currSteps - leftEncoder.currSteps));
+		Serial.println("S -> R: " + to_string(leftEncoder.currSteps - L_prev_steps) + "/t (" + to_string(speed) + ") Count: " + to_string(leftEncoder.currSteps)
+			+ "\nM -> L: " + to_string(rightEncoder.currSteps - R_prev_steps) + "/t (" + to_string(slaveSpeed) + ") Count: " + to_string(rightEncoder.currSteps)
+			+ " ERR: " + to_string(rightEncoder.currSteps - leftEncoder.currSteps) + "\n");
 		
 		//Updating with last values. We'll need'em next time.
 		L_prev_steps = leftEncoder.currSteps;
