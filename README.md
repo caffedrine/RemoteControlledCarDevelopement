@@ -32,7 +32,7 @@ Also make sure you have the possibility to create Printed Circuit Board (PCB).
   4. 25x Pinheader Female
   5. 2x 20 Double Pinheader Female
   6. 2x Reasonable leds
-  7. 2x 10K Resistors
+  7. 2x 0.6~0.9K Resistors
   8. 1x 12k Resistors
   9. *1x 390 Ohm Resistor*
   10. *1x240 Ohm Resistor*
@@ -55,8 +55,11 @@ Screws, wires, zipties and stuff like this :)
 ![final1](docs/final1.jpg)
 ![final2](docs/final2.jpg)
 
+# Tips
+  1. If you will try to compile Firmware and upload it from a Windows machine, it will take almost half minute (I7 + SSD) for code to be uploaded on ESP board and even more if you have installed an antivirus with ransomware protection enabled. My advice, use Ubuntu when debugging or improving the Firmware. It will be way easy and faster.
+  2. Be carefull at battery. A powerbang which provide only 800mA on output may not be be enough. Sometime, when WiFi Radios are enabled on ESP Board, motors and ESP Board need more current feed. When those peaks are reached, ADC ports may get crazy!
+  3. If something is not working, connect serial cable and check debug logs received via Serial port. It is enabled by default. 
+  4. 
+
 # Known bugs:
-  1. When powered on, one of the wheels rotate for few seconds until uC reach init sequence. This is because of motors driver (DRV8835). There are two EN (enable) pins which works on opposite logic levels. E.g. to rotate both wheels you need to do something like this: EN1=HIGH, EN2=LOW. However when you power on circuit, both pins are connected to GND this mean that one of the motors will start rotating.
-  **Solve?** - Use transistors to sync logical levels.
-  
-  2. Power ON/OFF Button - This is not a bug but such a button is a MUST because some powerbanks may not have such a button and is not ok to connect/disconnect battery whenever you want to start/stop the car..
+  1. Power ON/OFF Button - This is not a bug but such a button is a MUST because some powerbanks may not have such a button and is not ok to connect/disconnect battery whenever you want to start/stop the car...
