@@ -10,5 +10,7 @@
   
 ### Access Point credentials
 In case you want to test or change connection credentials: ***connection.h***
-```const char *AP_Name   = "LAB_ROVER_1";
-const char *AP_Passwd = "LabRover@Passwd";```
+```
+const char *AP_Name   = "LAB_ROVER_1";
+const char *AP_Passwd = "LabRover@Passwd";
+```
