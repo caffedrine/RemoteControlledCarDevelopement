@@ -23,8 +23,11 @@ Also make sure you have the possibility to create Printed Circuit Board (PCB).
      https://www.tln-werbemittel.de/powerbanks/powerbank-akku-tower-38-2600.html?force_sid=856833aa6188c21b70c41b708ace8f3c&br=1&gclid=CMzsyZ-ZiNQCFRmBswodprYAWQ
   8. **2xRubber O-Rings** - In order to get some aderency on wheels.
      https://www.hug-technik.com/shop/product_info.php?info=p20325_praezisions-o-ring-30-00-x-2-60-mm-nbr70.html
-  9. **1xUSB Micro B Connector** - http://uk.farnell.com/amphenol-fci/10104110-0001lf/micro-usb-2-0-type-b-receptacle/dp/2293753
-	 
+  9. **1xUSB Micro B Connector**
+     http://uk.farnell.com/amphenol-fci/10104110-0001lf/micro-usb-2-0-type-b-receptacle/dp/2293753
+  10.**Power ON/OFF switch**
+     https://eckstein-shop.de/Adafruit-Breadboard-friendly-SPDT-Slide-Switch-Schiebeschalter-EN
+     
 ### Electrical components:
   1. 1x LM317 Voltage regulator
   2. 2x Reasonable leds
