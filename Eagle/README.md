@@ -15,5 +15,7 @@
 # Physical Board
 ![pcb](pcb_finished.jpg)
 
+## Tip:
+  1. You can add an heat sink in case LM317 Voltage Regulator is getting hot.
+
 ## Known bug:
-  1. Have to add some transistors to schematic to prevent one of the motors from rotating!!!

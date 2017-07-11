@@ -14344,6 +14344,70 @@ In this library the device names are the same as the pin names of the symbols, t
 </deviceset>
 </devicesets>
 </library>
+<library name="switch">
+<description>&lt;b&gt;Switches&lt;/b&gt;&lt;p&gt;
+Marquardt, Siemens, C&amp;K, ITT, and others&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="TL3XPO">
+<description>&lt;b&gt;TINY SWITCH&lt;/b&gt;&lt;p&gt;
+Source: http://www2.produktinfo.conrad.com/datenblaetter/700000-724999/705152-da-01-de-Subminiaturschalter_TL_36YO.pdf</description>
+<wire x1="-5.08" y1="2.54" x2="5.08" y2="2.54" width="0.2032" layer="21"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-2.54" width="0.2032" layer="21"/>
+<wire x1="5.08" y1="-2.54" x2="-5.08" y2="-2.54" width="0.2032" layer="21"/>
+<wire x1="-5.08" y1="-2.54" x2="-5.08" y2="2.54" width="0.2032" layer="21"/>
+<wire x1="-3.175" y1="1.27" x2="0" y2="1.27" width="0.2032" layer="51"/>
+<wire x1="-3.175" y1="-1.27" x2="0" y2="-1.27" width="0.2032" layer="51"/>
+<wire x1="0" y1="1.27" x2="0" y2="-1.27" width="0.2032" layer="51" curve="-180"/>
+<wire x1="-1.375" y1="1.275" x2="-1.35" y2="-1.3" width="0.2032" layer="51" curve="-273.242292"/>
+<circle x="-3.175" y="0" radius="1.27" width="0.2032" layer="51"/>
+<pad name="1" x="-2.54" y="0" drill="1.1" diameter="1.4224" shape="long" rot="R90"/>
+<pad name="2" x="0" y="0" drill="1.1" diameter="1.4224" shape="long" rot="R90"/>
+<pad name="3" x="2.54" y="0" drill="1.1" diameter="1.4224" shape="long" rot="R90"/>
+<text x="-5.08" y="3.175" size="1.778" layer="25">&gt;NAME</text>
+<text x="-5.08" y="-5.08" size="1.778" layer="27">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="ON-MOM">
+<wire x1="0" y1="-3.175" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="-2.54" x2="-1.524" y2="3.048" width="0.254" layer="94"/>
+<wire x1="1.27" y1="2.54" x2="2.54" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="3.175" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="3.175" width="0.254" layer="94"/>
+<wire x1="0.508" y1="1.27" x2="1.016" y2="1.524" width="0.1524" layer="94"/>
+<wire x1="0.508" y1="1.27" x2="1.016" y2="1.016" width="0.1524" layer="94"/>
+<wire x1="0.508" y1="1.27" x2="1.524" y2="1.27" width="0.1524" layer="94"/>
+<text x="5.08" y="-2.54" size="1.778" layer="95" rot="R90">&gt;NAME</text>
+<text x="7.62" y="-2.54" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="P" x="0" y="-5.08" visible="pad" length="short" direction="pas" rot="R90"/>
+<pin name="S" x="2.54" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
+<pin name="O" x="-2.54" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="TL32PO" prefix="S">
+<description>&lt;b&gt;TINY SWITCH&lt;/b&gt; ON - MOM&lt;p&gt;
+Source: http://www2.produktinfo.conrad.com/datenblaetter/700000-724999/705152-da-01-de-Subminiaturschalter_TL_36YO.pdf</description>
+<gates>
+<gate name="BEF1" symbol="ON-MOM" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TL3XPO">
+<connects>
+<connect gate="BEF1" pin="O" pad="1"/>
+<connect gate="BEF1" pin="P" pad="2"/>
+<connect gate="BEF1" pin="S" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -14395,6 +14459,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="EN_L" library="pinhead" deviceset="PINHD-1X3" device=""/>
 <part name="ENC_R" library="pinhead" deviceset="PINHD-1X3" device=""/>
 <part name="IC1" library="v-reg" deviceset="LM317TS" device=""/>
+<part name="PWR_SWC" library="switch" deviceset="TL32PO" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14487,9 +14552,9 @@ CMD</text>
 <instance part="C5" gate="G$1" x="7.62" y="114.3" rot="R180"/>
 <instance part="C6" gate="G$1" x="38.1" y="106.68"/>
 <instance part="C7" gate="G$1" x="68.58" y="106.68"/>
-<instance part="GND2" gate="1" x="-2.54" y="93.98"/>
+<instance part="GND2" gate="1" x="-7.62" y="91.44"/>
 <instance part="GND5" gate="1" x="7.62" y="124.46" rot="R180"/>
-<instance part="U3" gate="G$1" x="-10.16" y="104.14" rot="R180"/>
+<instance part="U3" gate="G$1" x="-20.32" y="101.6" rot="R180"/>
 <instance part="ESP_L" gate="A" x="106.68" y="106.68"/>
 <instance part="P+1" gate="VCC" x="55.88" y="76.2"/>
 <instance part="P+2" gate="VCC" x="76.2" y="119.38"/>
@@ -14505,6 +14570,7 @@ CMD</text>
 <instance part="EN_L" gate="A" x="119.38" y="55.88"/>
 <instance part="ENC_R" gate="A" x="137.16" y="55.88" rot="MR0"/>
 <instance part="IC1" gate="1" x="50.8" y="111.76"/>
+<instance part="PWR_SWC" gate="BEF1" x="-2.54" y="106.68" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -14559,8 +14625,8 @@ CMD</text>
 </segment>
 <segment>
 <pinref part="GND2" gate="1" pin="GND"/>
-<wire x1="-5.08" y1="99.06" x2="-2.54" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="-2.54" y1="99.06" x2="-2.54" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="96.52" x2="-7.62" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="96.52" x2="-7.62" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="U3" gate="G$1" pin="GND"/>
 </segment>
 <segment>
@@ -14807,14 +14873,13 @@ CMD</text>
 <pinref part="SUPPLY3" gate="G$1" pin="VDD"/>
 </segment>
 <segment>
-<pinref part="U3" gate="G$1" pin="VBUS"/>
 <pinref part="C5" gate="G$1" pin="+"/>
-<wire x1="-5.08" y1="109.22" x2="7.62" y2="109.22" width="0.1524" layer="91"/>
 <wire x1="7.62" y1="109.22" x2="7.62" y2="111.76" width="0.1524" layer="91"/>
 <pinref part="SUPPLY1" gate="G$1" pin="VDD"/>
 <wire x1="7.62" y1="109.22" x2="17.78" y2="109.22" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="109.22" x2="17.78" y2="116.84" width="0.1524" layer="91"/>
-<junction x="7.62" y="109.22"/>
+<pinref part="PWR_SWC" gate="BEF1" pin="O"/>
+<wire x1="2.54" y1="109.22" x2="7.62" y2="109.22" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -14836,6 +14901,13 @@ CMD</text>
 <pinref part="GD|RX|TX" gate="A" pin="3"/>
 <pinref part="ESP_R" gate="A" pin="8"/>
 <wire x1="198.12" y1="109.22" x2="165.1" y2="109.22" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$11" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="VBUS"/>
+<pinref part="PWR_SWC" gate="BEF1" pin="P"/>
+<wire x1="-15.24" y1="106.68" x2="-7.62" y2="106.68" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

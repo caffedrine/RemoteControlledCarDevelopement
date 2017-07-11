@@ -26,7 +26,7 @@ Also make sure you have the possibility to create Printed Circuit Board (PCB).
   9. **1xUSB Micro B Connector**
      http://uk.farnell.com/amphenol-fci/10104110-0001lf/micro-usb-2-0-type-b-receptacle/dp/2293753
   10. **Power ON/OFF switch**
-     https://eckstein-shop.de/Adafruit-Breadboard-friendly-SPDT-Slide-Switch-Schiebeschalter-EN
+      https://eckstein-shop.de/Adafruit-Breadboard-friendly-SPDT-Slide-Switch-Schiebeschalter-EN
      
 ### Electrical components:
   1. 1x LM317 Voltage regulator

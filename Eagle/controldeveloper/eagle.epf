@@ -349,8 +349,8 @@ UsedLibrary="dependencies/MicroUSB.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="161 184 1127 673"
-State=1
+Loc="277 181 1243 670"
+State=2
 Number=0
 
 [Desktop]
