@@ -59,7 +59,7 @@ bin/
 dll/
 doc/
 lib/
-src/
+
 .classpath
 .project
 
