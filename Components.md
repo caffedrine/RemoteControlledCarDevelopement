@@ -4,15 +4,15 @@ Also make sure you have the possibility to create Printed Circuit Boards (PCB).
 
 ### Main components required:
   1. **2x QRE1113** - SparkFun RedBot Sensor - Line Follower
-     https://eckstein-shop.de/SparkFun-RedBot-Sensor-Line-Follower-EN
+     https://eckstein-shop.de/SparkFun-RedBot-Sensor-Line-Follower
   2. **2x DC Motors + GearBox** - Recommended gear ratio: 120:1
      http://www.exp-tech.de/dagu-dc-gear-motor-paar-90-degree-shaft-120-1
   3. **1x DRV8835 Dual Motor Driver** - In case you don't want to make your own H bridges.
      http://www.exp-tech.de/drv8835-dual-motor-driver-carrier 
   4. **1x Espressif ESP-WROOM-32** - This is the WiFi 2.4 GHz module used to control car.
-     https://eckstein-shop.de/Espressif-ESP-WROOM-32-EN
+     https://eckstein-shop.de/Espressif-ESP-WROOM-32
   5. **1x Wifi Module Adapter** - This will make life easier
-     https://eckstein-shop.de/Adapter-Breakout-Board-for-ESP-32S-ESP32-ESP-WROOM-32-Wireless-Bluetooth-Module
+     https://eckstein-shop.de/Adapter-Breakout-Board-fuer-ESP-32S-ESP32-ESP-WROOM-32-Wireless-Bluetooth-Module
   6. **1x Plastic Wheel Ball**
      http://www.exp-tech.de/pololu-ball-caster-with-1-2-plastic-ball?gclid=CKmr-tb2h9QCFUklgQode0oNgg
   7. **1x Powerbank** - You can also find this on Amazon at better prices.
@@ -22,7 +22,7 @@ Also make sure you have the possibility to create Printed Circuit Boards (PCB).
   9. **1xUSB Micro B Connector**
      http://uk.farnell.com/amphenol-fci/10104110-0001lf/micro-usb-2-0-type-b-receptacle/dp/2293753
   10. **Power ON/OFF switch**
-      https://eckstein-shop.de/Adafruit-Breadboard-friendly-SPDT-Slide-Switch-Schiebeschalter-EN
+      https://eckstein-shop.de/Adafruit-Breadboard-friendly-SPDT-Slide-Switch-Schiebeschalter
   11. **6.5mm Screws**
   	  https://www.conrad.biz/de/blechschrauben-22-mm-65-mm-kreuzschlitz-philips-din-7981-c-edelstahl-a2-100-st-liko-a2-839536-839536.html
      
