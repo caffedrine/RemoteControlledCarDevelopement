@@ -3,7 +3,7 @@
 Designing and implementing a remote controlled rover from zero to hero!
 
 # List of components
-(Check list of components here)[https://github.com/caffedrine/RemoteControlledCarDevelopement/blob/master/Components.md] or **Components.md**
+[Check list of components here](https://github.com/caffedrine/RemoteControlledCarDevelopement/blob/master/Components.md) or **Components.md**
 # Results
 
 ![final1](docs/final1.jpg)
