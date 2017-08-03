@@ -21,7 +21,7 @@ First of all you will have to print frame from **3D_Design** folder:
 PS: There are multiple formats for RoverFrame. Choose the one compatible with 3D printer.
 
 At the end you'll have something like this:
-[Frame printed](docs/frameprinted.jpg)
+![Frame printed](docs/frameprinted.jpg)
 
 ### 2. Print electrical design (PCB)
 In folder **Eagle** you will find electrical schematic and pcb design and some helpfull notes. Software used to design circuit schematic and PCB was **Eagle v6.1** and project files are under *Eagle/controldeveloper/*.
@@ -30,7 +30,7 @@ Create the PCB using a CNC machine or using *home made* method.
 After you printed PCB, solder all components according to schematic and instructions from **Eagle** folder.
 
 At the end, you'll hae something like this:
-[PCB Finished](Eagle/pcb_finished.jpg)
+![PCB Finished](Eagle/pcb_finished.jpg)
 
 # Additional building tips
   1. If you will try to compile Firmware and upload it from a Windows machine, it will take almost half minute (I7 + SSD) for code to be uploaded on ESP board and even more if you have installed an antivirus with ransomware protection enabled. My advice, use Ubuntu when debugging or improving the Firmware. It will be way easy and faster.
