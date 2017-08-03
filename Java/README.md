@@ -32,13 +32,13 @@ PS: Old code is just commented.
       
 ## Explained changes:     
 The car only accept the following instructions in the following format:
-  1. Direction: **>>[D;<degrees>;<0>]** 
+  1. Direction: **>>[D;\<degrees\>;<0>]** 
      * where degrees is in interval: [-90, 90] and is the angle you want to make;
 	 * examples: >>[D;90;0] - rotate to right 90 degrees; [D;-90;0] - rotate to left 90 degrees.
-  2. Gear: **>>[G;<speed>;<duration>]**
+  2. Gear: **>>[G;\<speed\>;\<duration\>]**
      * where speed is a value in interval [-100, 100]; where -100 is 100% power backward and 100 is 100% power forward;
      * examples: >>[G;80;5] - move forward for 5 seconds with 80% power; >>[G;-50;2.5] - move backward with 50% power for 2.5 seconds;
-  3. Pause: **>>[P;<duration>;<0>]**
+  3. Pause: **>>[P;\<duration\>;<0>]**
      * where duration is the duration for car to hold brakes;
      * examples: >>[P;5;0] - car will stop any action for 5 seconds;
 
