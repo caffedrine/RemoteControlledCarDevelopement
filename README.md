@@ -6,6 +6,9 @@ Designing and implementing a remote controlled rover from zero to hero!
 [Check list of components here](https://github.com/caffedrine/RemoteControlledCarDevelopement/blob/master/Components.md) or **Components.md**
 Costs: ~60EUR
 
+# Project information
+Download the followind Word document: [RC_Car_Developement.odt](docs/RC_Car_Developement.odt)
+
 # Results
 
 ![final1](docs/final1.jpg)
@@ -28,6 +31,13 @@ In folder **Eagle** you will find electrical schematic and pcb design and some h
 Create the PCB using a CNC machine or using *home made* method.
 
 After you printed PCB, solder all components according to schematic and instructions from **Eagle** folder.
+
+### 3. Assemble all components like in the following pictures:
+!()[]
+
+### 4. Uploading firmware to microcontroller:
+
+In order to do this, you'll have to use the following pins:
 
 At the end, you'll hae something like this:
 ![PCB Finished](Eagle/pcb_finished.jpg)
