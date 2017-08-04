@@ -64,5 +64,4 @@ src/*
 .project
 
 # TCP socket example should be public
-controldeveloper/
 
