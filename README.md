@@ -79,7 +79,7 @@ For example, type **>>>[G;20;3000]** and hit *Enter*. At this point, car will gi
 
 Details about commands here: [Java Commands](Java/)
 
-At this point, you can made your own application with joysticks and stuff and use TCP sockets to send commands! Check my other repositories as I already made some C++ and Qt Wrappers for TCP Sockets. Java or C# should be easier :)
+At this point, you can made your own application with joysticks and stuff and use TCP sockets to send commands! Check my other repositories as I already made some C++ and Qt Wrappers for TCP Sockets. Check Java folder as WiFi.java may be public :)
 
 **Note:** You can also use mobile phone but use an application such as *Mobile Telnet* instead of PuTTy.
 	
