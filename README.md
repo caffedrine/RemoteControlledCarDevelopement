@@ -50,7 +50,26 @@ Usually you coonnect pins to a Serial-2-USB converter.
 #### 8. Right QRE1113 IR Sensor
 Connector for right wheel sensor.
 
-## How to control the car
+**Notes:**
+  * future versions have a power switch on right-bottom edge;
+  * micro USB connection is in bottom layer right beside motors connector;
+
+### How to control the car
+Turn the power on by connecting cable to powerbank and swith on. After few seconds, connection led should blink indicating that car is waiting for a incomming conenction. To control the car, two connection phases are required:
+1. Connecting to AP - This is the exactly like connecting to any regular router or hotspot. This is possible because car will automatically will create an Access Point (hotspot) when is powered on. Just connect to that network!
+In order to do this, you will need **AP Name** and **password**. Check here for credentials: [firmware](Arduino/)
+Windows instructions: https://support.microsoft.com/en-us/help/17137/windows-setting-up-wireless-network
+
+2. After you are connected, the connection led will blink a little bit faster. Now, now we need to make sure we are connected to right network. 
+The following tool is required: [putty](http://www.putty.org/) - download and install PuTTy.
+Launch and fill IP address with **192.168.4.1** and port **1337**:
+![](docs/putty.png)
+
+Then click open button (bottom).
+
+At this point communication channel should be establihed with car. If everything is fine, the connection led should not blink anymore and you will get the following window:
+
+
 
 ![car](carinfo.jpg)
 	
