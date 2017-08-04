@@ -64,15 +64,18 @@ Windows instructions: https://support.microsoft.com/en-us/help/17137/windows-set
 The following tool is required: [putty](http://www.putty.org/) - download and install PuTTy.
 Launch and fill IP address with **192.168.4.1** and port **1337** and select "Telnet" for protocol, as in the following picture:
 
-![](docs/putty1.png)
+![Putty connecting](docs/putty1.png)
 
 Then click open button (bottom).
 
-At this point communication channel should be establihed with car. If everything is fine, the connection led should not blink anymore and you will get the following window:
-![](docs/putty2.png)
+At this point communication channel should be established with car. If everything is fine, the connection led should not blink anymore and you will get the following window:
+
+![Connection established](docs/putty2.png)
 
 We can use this terminal to send commands to car:
 For example, type **>>>[G;20;3000]** and hit *Enter*. At this point, car will give feed back when command is received and executed:
-![](docs/putty3.png)
+
+![Sending commands](docs/putty3.png)
+
 Details about commands here: [Java Commands](Java/)
 	
