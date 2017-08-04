@@ -59,10 +59,10 @@ bin/
 dll/
 doc/
 lib/
-src/
+src/*
 .classpath
 .project
 
 # TCP socket example should be public
-!/controldeveloper/src/hsrt/mec/controldeveloper/io/WiFi.java
+controldeveloper/
 
