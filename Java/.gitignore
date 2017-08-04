@@ -64,5 +64,5 @@ src/
 .project
 
 # TCP socket example should be public
-!controldeveloper/src/hsrt/mec/controldeveloper/io/WiFi.java
+!/controldeveloper/src/hsrt/mec/controldeveloper/io/WiFi.java
 
