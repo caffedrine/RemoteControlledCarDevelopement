@@ -32,6 +32,23 @@ This is a LED whose meant is to act like any regular ethernet traffic indicator.
 Connector for left wheel sensor.
 
 #### 4. RESET Button
+This is a push button which will reset car. Whether connection is not responding or you're unable to connect, presh this button and program will reset.
+
+#### 5. Motors connector
+Connect motors to this socket using the given pairs. First two entries for left motor and last two entries for right motor. In case motors are reversed, just switch polarity to get the correct rotation direction. 
+PS: Do not cross connections between motors!!!
+
+#### 6. IO0
+This is a push button and is used to turn microcontroller into programming mode. Whether you want to upload a new firmware, you'll have to use this button in the following way:
+Push IO0 and keep it pushed >> once RESET button (don't keep it pushed) >> release IO button. Now the microcontrolled will enter on programing mode and a new firmware can be uploaded using ping pins from point 7.
+
+#### 7. Programming connectors
+This is the socket used to upload a new firmware on mictrocontroller. Pins are active only when microcontroller is turned on on programming mode using point 6 (above).
+Usually you coonnect pins to a Serial-2-USB converter.
+**WARNING:** Logical levels are 0-3.3V. Applying 5V may broke the board.
+
+#### 8. Right QRE1113 IR Sensor
+Connector for right wheel sensor.
 
 ## How to control the car
 
