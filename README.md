@@ -14,6 +14,10 @@ Designing and implementing a remote controlled rover from zero to hero!
 ![final1](docs/final1.jpg)
 ![final2](docs/final2.jpg)
 
+## Coonnections 
+
+![connections](docs/connections.jpg)
+
 ## How to control the car
 
 ![car](carinfo.jpg)
