@@ -52,3 +52,24 @@ Now you can rotate the wheels and check the accuracy of sensors or if sensors ar
 
 If you need to recalibrate sensors, the c++ file **QRE1113_Driver.h** from *Arduino/ControlDeveloper_ESP32Wroom* folder according to it's documentation.
 
+## 3. Uploading new firmware
+
+It's the same procedure as uploading code to ESP32-Wroom board.
+
+1. You'll need to install the following softwares:
+  a. Arduino IDE: https://www.arduino.cc/en/Main/Software
+  b. ESP32 Support: https://github.com/espressif/arduino-esp32/blob/master/doc/windows.md
+ 
+2. Now open .ino file from *Arduino/ControlDeveloper_ESP32Wroom* with Arduino IDE.
+3. Configure IDE:
+  a. Select the correct serial port: Tools -> Port
+  b. From Tools >> Board select **FireBeetle-ESP32**
+  c. Tools >> Flash Freq -> 80MHz, Upload speed -> 921600
+  
+4. Click un upload button.
+
+At this point, the bottom console will display messages regarding progress and whether operation succeed or fail.
+ 
+
+
+
