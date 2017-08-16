@@ -40,7 +40,7 @@ PS: Under linux, launch putty from terminal with sudo permission ($ sudo putty) 
 PS1: If you have other serial devices connected, you may have to change it to the correct one. On windows COM1 -> COM2 and on Linux /dev/ttyUSB0 -> /dev/ttyUSB1
 ![serial connection](docs/serial_debugging1.png)
 
-After putty launches a new terminal, press reset button from top of the care and the terminal will display current state of car:
+After putty launches a new terminal, press reset button from top of the car and the terminal will display current state of car:
 ![serial connection2](docs/serial_debugging2.png)
 
 Now connect to car from regullar application and terminal will display data every 0.5 seconds in the following format:
@@ -64,17 +64,13 @@ It's the same procedure as uploading code to ESP32-Wroom board.
 2. Now open .ino file from *Arduino/ControlDeveloper_ESP32Wroom* with Arduino IDE.
 3. Configure IDE:
 
-
      a. Select the correct serial port: Tools -> Port
      
      b. From Tools >> Board select **FireBeetle-ESP32**
      
      c. Tools >> Flash Freq -> 80MHz, Upload speed -> 921600
-  
-4. Click un upload button.
+4. Turn car into programming mode: Push reset button + IO button from the top of car and release first reset button and then I0 button. 
+5. Click un upload button.
 
 At this point, the bottom console will display messages regarding progress and whether operation succeed or fail.
- 
-
-
 
