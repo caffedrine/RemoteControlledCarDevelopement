@@ -12,12 +12,12 @@ Designing and implementing a remote controlled rover from zero to hero!
 
 ## Results
 
-![final1](docs/final1.jpg)
-![final2](docs/final2.jpg)
+![final1](docs/img/final1.jpg)
+![final2](docs/img/final2.jpg)
 
 ## Connections 
 
-![connections](docs/connections.jpg)
+![connections](docs/img/connections.jpg)
 
 #### 1. Connection indicator LED
 This is a LED whose meant is to indicate whether there is a connection established with car or not.
@@ -65,18 +65,18 @@ Windows instructions: https://support.microsoft.com/en-us/help/17137/windows-set
 The following tool is required: [putty](http://www.putty.org/) - download and install PuTTy.
 Launch and fill IP address with **192.168.4.1** and port **1337** and select "Telnet" for protocol, as in the following picture:
 
-![Putty connecting](docs/putty1.png)
+![Putty connecting](docs/img/putty1.png)
 
 Then click open button (bottom).
 
 At this point communication channel should be established with car. If everything is fine, the connection led should not blink anymore and you will get the following window:
 
-![Connection established](docs/putty2.png)
+![Connection established](docs/img/putty2.png)
 
 We can use this terminal to send commands to car:
 For example, type **>>>[G;20;3000]** and hit *Enter*. At this point, car will give feed back when command is received and executed:
 
-![Sending commands](docs/putty3.png)
+![Sending commands](docs/img/putty3.png)
 
 Details about commands here: [Java Commands](Java/)
 

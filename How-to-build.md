@@ -8,7 +8,7 @@ First of all you will have to print frame from **3D_Design** folder:
 PS: There are multiple formats for RoverFrame. Choose the one compatible with 3D printer.
 
 At the end you'll have something like this:
-![Frame printed](docs/frameprinted.jpg)
+![Frame printed](docs/img/frameprinted.jpg)
 
 ### 2. Print electrical design (PCB)
 In folder **Eagle** you will find electrical schematic and pcb design and some helpfull notes. Software used to design circuit schematic and PCB was **Eagle v6.1** and project files are under *Eagle/controldeveloper/*.
