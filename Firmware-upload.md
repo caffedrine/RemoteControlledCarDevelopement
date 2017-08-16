@@ -23,11 +23,11 @@ And the witing should looks like this:
 
 The pins which shuld be connected in this order to debugging port:
 
-**Adapter -> Car**
+~~~Adapter -> Car
 RX -> PIN 1
 TX -> PIN 2
 GND -> PIN 3
-
+~~~
 Not that we have everything connected, we have two powwibilities: debug or upload firmware
 
 ## 2. Debugging 
