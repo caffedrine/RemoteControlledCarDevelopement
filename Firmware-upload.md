@@ -1,6 +1,6 @@
 # Firmware
 
-# 1. Connection
+## 1. Connection
 
 Debugging and firmware uploading share the same connection. No matter if you want to debug or to upload a new version of firmware, connection instructions are the same, always!
 
@@ -21,3 +21,21 @@ Don't forget also about mini USB cable used to connect adapter to computer:
 And the witing should looks like this:
 ![serial connection](docs/serial_connection_pins.jpg)
 
+The pins which shuld be connected in this order to debugging port:
+
+**Adapter -> Car**
+RX -> PIN 1
+TX -> PIN 2
+GND -> PIN 3
+
+Not that we have everything connected, we have two powwibilities: debug or upload firmware
+
+## 2. Debugging 
+
+To receive debugging data, we'll use PuTTy application: http://www.putty.org/
+Download and install application.
+
+Open application, select Serial port, set boud rate to 115200 then click open.
+PS: Under linux, launch putty from terminal with sudo permission ($ sudo putty) and use port name **/dev/ttyUSB0**.
+PS1: If you have other serial devices connected, you may have to change it to the correct one. On windows COM1 -> COM2 and on Linux /dev/ttyUSB0 -> /dev/ttyUSB1
+![serial connection](docs/serial_debugging1.jpg)
