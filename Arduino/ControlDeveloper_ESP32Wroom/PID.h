@@ -33,8 +33,8 @@ void printEncoderSpeed(int timeBase)
 	if (millis() - prevMillis >= timeBase)
 	{
 		prevMillis = millis();
-		Serial.println("S -> R: " + to_string(leftEncoder.currSteps - L_prev_steps) + "/t (" + to_string(speed) + ") Count: " + to_string(leftEncoder.currSteps)
-			+ "\nM -> L: " + to_string(rightEncoder.currSteps - R_prev_steps) + "/t (" + to_string(slaveSpeed) + ") Count: " + to_string(rightEncoder.currSteps)
+		Serial.println(" R: " + to_string(leftEncoder.currSteps - L_prev_steps) + "/t (" + to_string(speed) + ") Count: " + to_string(leftEncoder.currSteps)
+			+ "\n L: " + to_string(rightEncoder.currSteps - R_prev_steps) + "/t (" + to_string(slaveSpeed) + ") Count: " + to_string(rightEncoder.currSteps)
 			+ " ERR: " + to_string(rightEncoder.currSteps - leftEncoder.currSteps) + "\n");
 		
 		//Updating with last values. We'll need'em next time.

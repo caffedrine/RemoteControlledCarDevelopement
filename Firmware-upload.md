@@ -38,4 +38,12 @@ Download and install application.
 Open application, select Serial port, set boud rate to 115200 then click open.
 PS: Under linux, launch putty from terminal with sudo permission ($ sudo putty) and use port name **/dev/ttyUSB0**.
 PS1: If you have other serial devices connected, you may have to change it to the correct one. On windows COM1 -> COM2 and on Linux /dev/ttyUSB0 -> /dev/ttyUSB1
-![serial connection](docs/serial_debugging1.jpg)
+![serial connection](docs/serial_debugging1.png)
+
+After putty launches a new terminal, press reset button from top of the care and the terminal will display current state of car:
+![serial connection2](docs/serial_debugging2.png)
+
+Now connect to car from regullar application and terminal will display data every 0.5 seconds in the following format: \<SIDE\>: steps/\<time\> (\<analogic_output\>) Count: <counted_steps>
+Example: R: 3/t (3400) Count: 133 -> right right wheel speed is 3/t and have counted till reset a number of 133 steps.
+
+
