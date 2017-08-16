@@ -14,3 +14,6 @@ In order to do this, it's recommended to use a serial adapter such as the follow
 
 WARNING: Don't forget to set juper on 3.3V, as in picture:
 ![jumper](docs/serial_jumper.jpg)
+
+Don't forget also about mini USB cable used to connect adapter to computer:
+![miniusb cable](docs/miniusb_cable.jpg)
