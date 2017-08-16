@@ -16,17 +16,14 @@ Create the PCB using a CNC machine or using *home made* method.
 
 After you printed PCB, solder all components according to schematic and instructions from **Eagle** folder.
 
-At the end, you'll hae something like this:
+At the end, you'll have something like this:
 ![PCB Finished](Eagle/pcb_finished.jpg)
 
 ### 3. Assemble all components like in the following pictures:
-!()[]
+!(car1)[]
+!(car2)[]
+!(car3)[]
 
-### 4. Uploading firmware to microcontroller:
-
-In order to do this, you'll have to use the following pins
-
-To be continued...
 
 # Additional building tips
   1. If you will try to compile Firmware and upload it from a Windows machine, it will take almost half minute (I7 + SSD) for code to be uploaded on ESP board and even more if you have installed an antivirus with ransomware protection enabled. My advice, use Ubuntu when debugging or improving the Firmware. It will be way easy and faster.

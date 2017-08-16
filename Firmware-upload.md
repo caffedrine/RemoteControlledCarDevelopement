@@ -68,6 +68,7 @@ It's the same procedure as uploading code to ESP32-Wroom board.
      a. Select the correct serial port: Tools -> Port
      
      b. From Tools >> Board select **FireBeetle-ESP32**
+     ![board](docs/ESP32_Arduino_IDE_1.png)
      
      c. Tools >> Flash Freq -> 80MHz, Upload speed -> 921600
 4. Turn car into programming mode: Push reset button + IO button from the top of car and release first reset button and then I0 button. 
