@@ -20,9 +20,9 @@ At the end, you'll have something like this:
 ![PCB Finished](Eagle/pcb_finished.jpg)
 
 ### 3. Assemble all components like in the following pictures:
-!(car1)[]
-!(car2)[]
-!(car3)[]
+!(car1)[docs/img/car1.jpg]
+!(car2)[docs/img/car2.jpg]
+!(car3)[docs/img/car3.jpg]
 
 
 # Additional building tips
