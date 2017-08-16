@@ -64,6 +64,7 @@ It's the same procedure as uploading code to ESP32-Wroom board.
 2. Now open .ino file from *Arduino/ControlDeveloper_ESP32Wroom* with Arduino IDE.
 3. Configure IDE:
 
+
      a. Select the correct serial port: Tools -> Port
      
      b. From Tools >> Board select **FireBeetle-ESP32**
