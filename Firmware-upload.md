@@ -10,7 +10,7 @@ Usually the computer already comes with serial ports **BUT** their logic level i
 
 In order to do this, it's recommended to use a serial adapter such as the following one: 
 
-!(serial adapter)[docs/usb-ttl-ft232rl-pinout.png]
+![serial adapter](docs/usb-ttl-ft232rl-pinout.png)
 
 WARNING: Don't forget to set juper on 3.3V, as in picture:
-!(jumper)[docs/serial_jumper.jpg]
+![jumper](docs/serial_jumper.jpg)
