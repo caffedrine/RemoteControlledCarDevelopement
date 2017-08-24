@@ -7,7 +7,7 @@
 #include <WiFiClient.h>
 
 //AP Credentials. Those will be used in our Java applicaion.
-const char *AP_Name   = "LAB_ROVER_1";
+const char *AP_Name   = "LAB_ROVER_3";
 const char *AP_Passwd = "LabRover@Passwd";
 
 //Led which will indicate data transfers

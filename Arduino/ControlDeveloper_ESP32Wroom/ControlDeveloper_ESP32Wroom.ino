@@ -3,7 +3,7 @@
 #include <WiFi.h>
 
 //Enable this to get info via serial port
-#define DEBUG false
+#define DEBUG true
 
 #include "connection.h"
 #include "DRV8835_Driver.h"
