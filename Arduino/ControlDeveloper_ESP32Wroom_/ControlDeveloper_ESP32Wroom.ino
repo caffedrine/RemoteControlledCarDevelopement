@@ -3,7 +3,7 @@
 #include <WiFi.h>
 
 //Enable this to get info via serial port
-#define DEBUG false
+#define DEBUG true
 
 #include "connection.h"
 #include "DRV8835_Driver.h"
@@ -31,11 +31,8 @@ struct Command
 
 void setup()
 {
-	if(DEBUG)
-	{
-		Serial.begin(115200);
-		Serial.println("---STARTING---");
-	}
+	Serial.begin(115200);
+	Serial.println("---STARTING---");
 
 	//initialize motors
 	motors.attachM1Pin(25, 33, true);	// en, ph	-> left motor
@@ -44,9 +41,9 @@ void setup()
 	motors.brake();
 	
 	//initialize connection
-	conn::setupAP();
-	server.begin();
-	conn::waitForServerClients();
+//	conn::setupAP();
+//	server.begin();
+//	conn::waitForServerClients();
 	//*/
 }
 
@@ -58,8 +55,8 @@ void loop()
 	
 	
 	//Wifi link - check if client is still connected
-	if (!client || !client.connected())
-		conn::waitForServerClients();
+//	if (!client || !client.connected())
+//		conn::waitForServerClients();
 
 	//Check if client have a command for us
 	if (client.available())
@@ -241,7 +238,7 @@ void command_gear()
 	int rightSteps = rightEncoder.currSteps;
 	int error = (leftSteps > rightSteps) ? leftSteps - rightSteps : ( (rightSteps > leftSteps) ? rightSteps - leftSteps : 0);
 	bool m1BrakeEn = false, m2BrakeEn = false;	//remember which motor is stopped
-
+	/*
 	if (error != 0)
 	{
 		if (leftSteps < rightSteps)	//if left motor needs to make more steps
@@ -270,12 +267,11 @@ void command_gear()
 			}
 		}
 	}
-
-	//brake motors - no more steps after gear was executed - if capacitors are not exactly the same
-	// as required in shematics, disable this. it will reset board due to high amount of required current to brake;
-//	if( !m1BrakeEn) motors.setM1Speed(speed*-1);
-//	if( !m2BrakeEn) motors.setM2Speed(speed*-1);
-//	delay(10);
+	*/
+	//brake motors - no more steps after gear was executed
+	if( !m1BrakeEn) motors.setM1Speed(speed*-1);
+	if( !m2BrakeEn) motors.setM2Speed(speed*-1);
+	delay(25);
 
 	mapSpeed(0);		//set speed to 0
 	motors.brake();		//brake motors

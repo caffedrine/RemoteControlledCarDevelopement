@@ -27,8 +27,6 @@ void mapSpeed(int power);
 */
 void printEncoderSpeed(int timeBase)
 {
-	if(!DEBUG) return;
-
 	static int prevMillis = 0;
 	static int L_prev_steps = 0, R_prev_steps = 0;
 
@@ -151,7 +149,7 @@ void mapSpeed(int power)
 		}
 		else
 		{
-			power = map(power, 0, 100, 40, 75);	//for this interval PID algorithm is ideal
+			power = map(power, 0, 100, 40, 80);	//for this interval PID algorithm is ideal
 			speed = map(power, 0, 100, motor_min, motor_max);
 		}
 
